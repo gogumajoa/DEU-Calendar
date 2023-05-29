@@ -45,7 +45,7 @@ public class detail extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JButton btnNewButton = new JButton("일정 등록");
+		JButton btnNewButton = new JButton("entry");
 		btnNewButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -58,31 +58,31 @@ public class detail extends JFrame {
 		btnNewButton.setBounds(420, 60, 94, 28);
 		contentPane.add(btnNewButton);
 		
-		JLabel lblNewLabel = new JLabel("날짜");
+		JLabel lblNewLabel = new JLabel("date");
 		lblNewLabel.setBounds(260, 20, 65, 37);
 		contentPane.add(lblNewLabel);
 		
-		JLabel lblNewLabel_1 = new JLabel("과목명");
+		JLabel lblNewLabel_1 = new JLabel("subject");
 		lblNewLabel_1.setBounds(67, 123, 112, 77);
 		contentPane.add(lblNewLabel_1);
 		
-		JLabel lblNewLabel_2 = new JLabel("과제 제목");
+		JLabel lblNewLabel_2 = new JLabel("subject title");
 		lblNewLabel_2.setBounds(207, 123, 307, 82);
 		contentPane.add(lblNewLabel_2);
 		
-		JLabel lblNewLabel_1_1 = new JLabel("일정 제목");
+		JLabel lblNewLabel_1_1 = new JLabel("title");
 		lblNewLabel_1_1.setBounds(67, 241, 112, 77);
 		contentPane.add(lblNewLabel_1_1);
 		
-		JLabel lblNewLabel_2_1 = new JLabel("일정 메모");
+		JLabel lblNewLabel_2_1 = new JLabel("memo");
 		lblNewLabel_2_1.setBounds(207, 241, 307, 82);
 		contentPane.add(lblNewLabel_2_1);
 		
-		JButton btnNewButton_1 = new JButton("수정");
+		JButton btnNewButton_1 = new JButton("change");
 		btnNewButton_1.setBounds(538, 150, 65, 50);
 		contentPane.add(btnNewButton_1);
 		
-		JButton btnNewButton_1_1 = new JButton("수정");
+		JButton btnNewButton_1_1 = new JButton("change");
 		btnNewButton_1_1.setBounds(538, 255, 65, 50);
 		contentPane.add(btnNewButton_1_1);
 	}

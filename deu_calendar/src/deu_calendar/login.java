@@ -10,12 +10,15 @@ import javax.swing.JTextField;
 import javax.swing.JButton;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import javax.swing.JPasswordField;
+import javax.swing.ImageIcon;
+import java.awt.Color;
 
 public class login extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField textField;
-	private JTextField textField_1;
+	private JPasswordField passwordField;
 
 	/**
 	 * Launch the application.
@@ -37,33 +40,30 @@ public class login extends JFrame {
 	 * Create the frame.
 	 */
 	public login() {
+		setTitle("\uB85C\uADF8\uC778");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 780, 500);
 		contentPane = new JPanel();
+		contentPane.setBackground(new Color(255, 255, 255));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
 		JLabel lblNewLabel = new JLabel("\uC544\uC774\uB514");
-		lblNewLabel.setBounds(221, 246, 57, 15);
+		lblNewLabel.setBounds(198, 321, 57, 15);
 		contentPane.add(lblNewLabel);
 		
 		JLabel lblNewLabel_1 = new JLabel("\uBE44\uBC00\uBC88\uD638");
-		lblNewLabel_1.setBounds(221, 300, 57, 15);
+		lblNewLabel_1.setBounds(198, 375, 57, 15);
 		contentPane.add(lblNewLabel_1);
 		
 		textField = new JTextField();
-		textField.setBounds(344, 243, 116, 21);
+		textField.setBounds(321, 318, 116, 21);
 		contentPane.add(textField);
 		textField.setColumns(10);
 		
-		textField_1 = new JTextField();
-		textField_1.setBounds(344, 297, 116, 21);
-		contentPane.add(textField_1);
-		textField_1.setColumns(10);
-		
-		JButton btnNewButton = new JButton("New button");
+		JButton btnNewButton = new JButton("\uB85C\uADF8\uC778");
 		btnNewButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -71,7 +71,16 @@ public class login extends JFrame {
 				new mainScreen();
 			}
 		});
-		btnNewButton.setBounds(542, 296, 97, 23);
+		btnNewButton.setBounds(481, 371, 97, 23);
 		contentPane.add(btnNewButton);
+		
+		passwordField = new JPasswordField();
+		passwordField.setBounds(321, 371, 116, 23);
+		contentPane.add(passwordField);
+		
+		JLabel lblNewLabel_2 = new JLabel("New label");
+		lblNewLabel_2.setIcon(new ImageIcon("C:\\Users\\ckd99\\Desktop\\deu.PNG"));
+		lblNewLabel_2.setBounds(246, 40, 259, 225);
+		contentPane.add(lblNewLabel_2);
 	}
 }

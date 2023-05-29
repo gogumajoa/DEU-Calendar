@@ -35,6 +35,7 @@ public class mainScreen extends JFrame {
 	 * Create the frame.
 	 */
 	public mainScreen() {
+		setTitle("\uBA54\uC778 \uD654\uBA74");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 816, 556);
 		setVisible(true); // ¼öÁ¤

@@ -90,7 +90,7 @@ public class entry extends JFrame {
 		rdbtnNewRadioButton_4.setBounds(138, 467, 121, 23);
 		contentPane.add(rdbtnNewRadioButton_4);
 		
-		JButton btnNewButton = new JButton("등록");
+		JButton btnNewButton = new JButton("entry");
 		btnNewButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -100,7 +100,7 @@ public class entry extends JFrame {
 		btnNewButton.setBounds(217, 528, 97, 23);
 		contentPane.add(btnNewButton);
 		
-		JButton btnNewButton_1 = new JButton("취소");
+		JButton btnNewButton_1 = new JButton("cancel");
 		btnNewButton_1.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
