@@ -79,7 +79,7 @@ public class login extends JFrame {
 		contentPane.add(passwordField);
 		
 		JLabel lblNewLabel_2 = new JLabel("New label");
-		lblNewLabel_2.setIcon(new ImageIcon("C:\\Users\\ckd99\\Desktop\\deu.PNG"));
+		lblNewLabel_2.setIcon(new ImageIcon("C:\\Java\\workspace\\deu_calendar\\src\\image\\deu.PNG"));
 		lblNewLabel_2.setBounds(246, 40, 259, 225);
 		contentPane.add(lblNewLabel_2);
 	}
