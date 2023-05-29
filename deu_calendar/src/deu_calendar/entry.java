@@ -16,6 +16,7 @@ import javax.swing.JButton;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.Enumeration;
+import java.awt.Color;
 
 public class entry extends JFrame {
 
@@ -44,9 +45,10 @@ public class entry extends JFrame {
 	 */
 	public entry() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 723, 624);
+		setBounds(100, 100, 724, 624);
 		setVisible(true);
 		contentPane = new JPanel();
+		contentPane.setBackground(new Color(255, 255, 255));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
 		setContentPane(contentPane);
@@ -75,22 +77,27 @@ public class entry extends JFrame {
 		contentPane.add(textArea);
 		
 		JRadioButton rdbtnNewRadioButton = new JRadioButton("\uBC18\uBCF5 \uC5C6\uC74C");
+		rdbtnNewRadioButton.setBackground(new Color(255, 255, 255));
 		rdbtnNewRadioButton.setBounds(138, 363, 121, 23);
 		contentPane.add(rdbtnNewRadioButton);
 		
 		JRadioButton rdbtnNewRadioButton_1 = new JRadioButton("\uB9E4\uC6D4 \uAC19\uC740 \uC77C");
+		rdbtnNewRadioButton_1.setBackground(new Color(255, 255, 255));
 		rdbtnNewRadioButton_1.setBounds(361, 363, 121, 23);
 		contentPane.add(rdbtnNewRadioButton_1);
 		
 		JRadioButton rdbtnNewRadioButton_2 = new JRadioButton("\uB9E4\uC77C");
+		rdbtnNewRadioButton_2.setBackground(new Color(255, 255, 255));
 		rdbtnNewRadioButton_2.setBounds(138, 412, 121, 23);
 		contentPane.add(rdbtnNewRadioButton_2);
 		
 		JRadioButton rdbtnNewRadioButton_3 = new JRadioButton("\uB9E4\uB144 \uAC19\uC740 \uC6D4\uC77C");
+		rdbtnNewRadioButton_3.setBackground(new Color(255, 255, 255));
 		rdbtnNewRadioButton_3.setBounds(361, 412, 121, 23);
 		contentPane.add(rdbtnNewRadioButton_3);
 		
 		JRadioButton rdbtnNewRadioButton_4 = new JRadioButton("\uB9E4\uC8FC \uAC19\uC740 \uC694\uC77C");
+		rdbtnNewRadioButton_4.setBackground(new Color(255, 255, 255));
 		rdbtnNewRadioButton_4.setBounds(138, 467, 121, 23);
 		contentPane.add(rdbtnNewRadioButton_4);
 		
@@ -145,6 +152,12 @@ public class entry extends JFrame {
 				
 			} // 취소 버튼 클릭
 		});
+		
+		JPanel panel = new JPanel();
+		panel.setForeground(new Color(0, 0, 0));
+		panel.setBackground(new Color(0, 0, 0));
+		panel.setBounds(137, 212, 413, 113);
+		contentPane.add(panel);
 		btnNewButton_1.setBounds(373, 528, 97, 23);
 		contentPane.add(btnNewButton_1);
 	}
