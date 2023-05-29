@@ -35,7 +35,7 @@ public class detail extends JFrame {
 	 * Create the frame.
 	 */
 	public detail() {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 668, 503);
 		setVisible(true);
 		contentPane = new JPanel();
