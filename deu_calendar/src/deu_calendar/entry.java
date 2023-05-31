@@ -55,7 +55,7 @@ public class entry extends JFrame {
 		contentPane.setLayout(null);
 		
 		JLabel lblNewLabel = new JLabel("\uC77C\uC815 \uB4F1\uB85D");
-		lblNewLabel.setFont(new Font("±¼¸²", Font.PLAIN, 20));
+		lblNewLabel.setFont(new Font("êµ´ë¦¼", Font.PLAIN, 20));
 		lblNewLabel.setBounds(303, 20, 95, 34);
 		contentPane.add(lblNewLabel);
 		
@@ -101,32 +101,33 @@ public class entry extends JFrame {
 		rdbtnNewRadioButton_4.setBounds(138, 467, 121, 23);
 		contentPane.add(rdbtnNewRadioButton_4);
 		
-		// ¶óµğ¿À ±×·ì °´Ã¼ »ı¼º
+		// ë¼ë””ì˜¤ ê·¸ë£¹ ê°ì²´ ìƒì„±
 		ButtonGroup BtnGroup = new ButtonGroup();
 		
-		// ¶óµğ¿À ¹öÆ°µéÀ» ±×·ìÀ¸·Î Ãß°¡
+		// ë¼ë””ì˜¤ ë²„íŠ¼ë“¤ì„ ê·¸ë£¹ìœ¼ë¡œ ì¶”ê°€
 		BtnGroup.add(rdbtnNewRadioButton);
 		BtnGroup.add(rdbtnNewRadioButton_1);
 		BtnGroup.add(rdbtnNewRadioButton_2);
 		BtnGroup.add(rdbtnNewRadioButton_3);
 		BtnGroup.add(rdbtnNewRadioButton_4);
 		
-		// registration Å¬·¡½ºÀÇ ÀÎ½ºÅÏ½º »ı¼º
+		// registration í´ë˜ìŠ¤ì˜ ì¸ìŠ¤í„´ìŠ¤ ìƒì„±
 		registration reg = new registration();
 		
 		JButton btnNewButton = new JButton("entry");
+		
 		btnNewButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				// ÀÏÁ¤ Á¦¸ñ °ª ¹Ş¾Æ¿À±â
+				// ì¼ì • ì œëª© ê°’ ë°›ì•„ì˜¤ê¸°
 				reg.birngTitle(textField.getText());
 				System.out.println(reg.birngTitle(textField.getText()));
 				
-				// ÀÏÁ¤ ¸Ş¸ğ °ª ¹Ş¾Æ¿À±â
+				// ì¼ì • ë©”ëª¨ ê°’ ë°›ì•„ì˜¤ê¸°
 				reg.bringMemo(textArea.getText());
 				System.out.println(reg.bringMemo(textArea.getText()));
 				
-				// ¼±ÅÃµÈ ¶óµğ¿À¹öÆ° °ª °¡Á®¿À±â
+				// ì„ íƒëœ ë¼ë””ì˜¤ë²„íŠ¼ ê°’ ê°€ì ¸ì˜¤ê¸°
 				JRadioButton selectBtn = null;
 		        for (Enumeration<AbstractButton> buttons = BtnGroup.getElements(); buttons.hasMoreElements();) {
 		            JRadioButton button = (JRadioButton) buttons.nextElement();
@@ -136,9 +137,9 @@ public class entry extends JFrame {
 		            }
 		        }
 				System.out.println(selectBtn.getActionCommand());
-				
+				reg.regist();
 				dispose();
-			} // µî·Ï ¹öÆ° Å¬¸¯
+			} // ë“±ë¡ ë²„íŠ¼ í´ë¦­
 		});
 		btnNewButton.setBounds(217, 528, 97, 23);
 		contentPane.add(btnNewButton);
@@ -150,7 +151,7 @@ public class entry extends JFrame {
 				
 				dispose();
 				
-			} // Ãë¼Ò ¹öÆ° Å¬¸¯
+			} // ì·¨ì†Œ ë²„íŠ¼ í´ë¦­
 		});
 		
 		JPanel panel = new JPanel();
