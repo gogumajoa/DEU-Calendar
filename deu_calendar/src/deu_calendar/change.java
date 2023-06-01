@@ -5,6 +5,9 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.text.AbstractDocument;
+import javax.swing.text.DocumentFilter;
+import javax.swing.text.DocumentFilter.FilterBypass;
 import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.JTextField;
@@ -40,9 +43,12 @@ public class change extends JFrame {
 	 * Create the frame.
 	 */
 	public change() {
+		setResizable(false);
+		setTitle("\uC77C\uC815 \uC218\uC815");
+		setSize(724,624);
+		setLocation(610,200);
 		setVisible(true);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 724, 624);
 		contentPane = new JPanel();
 		contentPane.setBackground(new Color(255, 255, 255));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -51,8 +57,27 @@ public class change extends JFrame {
 		contentPane.setLayout(null);
 		
 		JTextArea textArea = new JTextArea();
+		textArea.setFont(new Font("¸¼Àº °íµñ", Font.PLAIN, 16));
+		textArea.setLineWrap(true);
 		textArea.setBounds(138, 213, 411, 111);
 		contentPane.add(textArea);
+		
+		// ¿©±âºÎÅÍ Ãß°¡
+				int maxLength = 50; // ÃÖ´ë ±ÛÀÚ ¼ö
+		        AbstractDocument doc = (AbstractDocument) textArea.getDocument();
+		        doc.setDocumentFilter(new DocumentFilter() {
+		            @Override
+		            public void replace(FilterBypass fb, int offset, int length, String text, javax.swing.text.AttributeSet attrs) throws javax.swing.text.BadLocationException {
+		                int currentLength = fb.getDocument().getLength();
+		                int overLimit = (currentLength + text.length()) - maxLength - length;
+		                if (overLimit > 0) {
+		                    text = text.substring(0, text.length() - overLimit);
+		                }
+		                if (text.length() > 0) {
+		                    super.replace(fb, offset, length, text, attrs);
+		                }
+		            }
+		        }); // ¿©±â±îÁö
 		
 		JLabel lblNewLabel = new JLabel("\uC77C\uC815 \uC218\uC815");
 		lblNewLabel.setFont(new Font("±¼¸²", Font.PLAIN, 20));
@@ -68,7 +93,8 @@ public class change extends JFrame {
 		contentPane.add(lblNewLabel_2);
 		
 		textField = new JTextField();
-		textField.setBounds(283, 97, 275, 37);
+		textField.setFont(new Font("¸¼Àº °íµñ", Font.PLAIN, 16));
+		textField.setBounds(219, 97, 330, 37);
 		contentPane.add(textField);
 		textField.setColumns(10);
 		

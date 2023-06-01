@@ -50,6 +50,7 @@ public class registration {
 	    try {
 	    	
             con = DriverManager.getConnection(url, id, password);
+<<<<<<< HEAD
             System.out.println("DB ì—°ê²° ì„±ê³µ");
 
             // íŠ¸ëžœìž­ì…˜ ì‹œìž‘
@@ -75,6 +76,33 @@ public class registration {
                 con.rollback();
 
                 System.out.println("ì¼ì • ë°ì´í„° ì‚½ìž… ì¤‘ ì˜¤ë¥˜ê°€ ë°œìƒí–ˆìŠµë‹ˆë‹¤.");
+=======
+            System.out.println("DB ¿¬°á ¼º°ø");
+
+            // Æ®·£Àè¼Ç ½ÃÀÛ
+            con.setAutoCommit(false);         
+
+            try {
+                // "SUBJECT" Å×ÀÌºí¿¡ µ¥ÀÌÅÍ »ðÀÔ
+                String insertPlantSql = "INSERT INTO PLAN (STUDENT_ID, REGIST_DATE, PLAN_TITLE, MEMO, REPEATVALUE) VALUES (?, ?, ?, ?, ?)";
+                PreparedStatement insertPlanStatement = con.prepareStatement(insertPlantSql);
+                insertPlanStatement.setInt(1, 20215030); //ÀÓÀÇ·Î db Áý¾î³ÖÀº °ª ÇÐ¹ø
+                insertPlanStatement.setInt(2, 20230201); //³¯Â¥ ÀÓÀÇ °ª
+                insertPlanStatement.setString(3, birngTitle("")); //ÀÏÁ¤ ¸í
+                insertPlanStatement.setString(4, bringMemo("")); //¸Þ¸ð
+                insertPlanStatement.setInt(5, 22); //¹Ýº¹°ª
+                insertPlanStatement.executeUpdate();
+
+                // Æ®·£Àè¼Ç Ä¿¹Ô
+                con.commit();
+
+                System.out.println("ÀÏÁ¤ µ¥ÀÌÅÍ »ðÀÔÀÌ ¼º°øÀûÀ¸·Î ¿Ï·áµÇ¾ú½À´Ï´Ù.");
+            } catch (SQLException e) {
+                // Æ®·£Àè¼Ç ·Ñ¹é
+                con.rollback();
+
+                System.out.println("ÀÏÁ¤ µ¥ÀÌÅÍ »ðÀÔ Áß ¿À·ù°¡ ¹ß»ýÇß½À´Ï´Ù.");
+>>>>>>> upstream/main
                 e.printStackTrace();
             }
         } catch (SQLException e) {
@@ -84,12 +112,19 @@ public class registration {
             try {
                 if (con != null)
                     con.close();
+<<<<<<< HEAD
                 System.out.println("DB ì—°ê²° ì¢…ë£Œ");
+=======
+                System.out.println("DB ¿¬°á Á¾·á");
+>>>>>>> upstream/main
             } catch (SQLException e) {
                 e.printStackTrace();
             }
         }
+<<<<<<< HEAD
 		
+=======
+>>>>>>> upstream/main
 	}
 	
 	// ê²½ê³  ë©”ì‹œì§€ ë©”ì†Œë“œ
