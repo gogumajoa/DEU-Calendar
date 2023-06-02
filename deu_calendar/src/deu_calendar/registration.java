@@ -11,25 +11,26 @@ public class registration {
 	
 	private String planName; // 일정 제목
 	private String memoTextArea; // 일정 메모
-	private int Repetiton; // 반복 값
+	private String Repetiton; // 반복 값
 	private String dayValue; // 날짜 값
 	
 	// 일정 제목 가져오는 메소드
-	public String birngTitle(String planName) { 
+	public String birngTitle() { 
 		planName = entry.textField.getText();
 		
 		return planName;
 	}
 	
 	// 일정 메모 가져오는 메소드
-	public String bringMemo(String memoText) {
+	public String bringMemo() {
 		memoTextArea = entry.textArea.getText();
 		
 		return memoTextArea;	
 	}
 	
 	// 반복 값 가져오는 메소드
-	public int bringRepeat() {
+	public String bringRepeat() {
+		Repetiton = entry.Repetiton.getText();
 		
 		return Repetiton;
 	}
@@ -61,9 +62,9 @@ public class registration {
                 PreparedStatement insertPlanStatement = con.prepareStatement(insertPlantSql);
                 insertPlanStatement.setInt(1, 20215030); //임의로 db 집어넣은 값 학번
                 insertPlanStatement.setInt(2, 20230201); //날짜 임의 값
-                insertPlanStatement.setString(3, birngTitle("")); //일정 명
-                insertPlanStatement.setString(4, bringMemo("")); //메모
-                insertPlanStatement.setInt(5, 22); //반복값
+                insertPlanStatement.setString(3, birngTitle()); //일정 명
+                insertPlanStatement.setString(4, bringMemo()); //메모
+                insertPlanStatement.setString(5, bringRepeat()); //반복값
                 insertPlanStatement.executeUpdate();
 
                 // 트랜잭션 커밋
