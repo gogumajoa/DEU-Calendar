@@ -27,6 +27,10 @@ public class mainScreen extends JFrame implements ItemListener, ActionListener{
 	Font fnt = new Font("굴림체", Font.BOLD, 15);
 	Font fnt2 = new Font("굴림체", Font.BOLD, 12);
 	
+	mainScreen_Control controller = new mainScreen_Control();
+	int studentID=20215030;
+	ArrayList<ArrayList<ArrayList<String>>> result = controller.ConnectDB(studentID);
+	
 	
 	//상단
 	JPanel selectPane = new JPanel(); //패널생성
@@ -141,10 +145,10 @@ public class mainScreen extends JFrame implements ItemListener, ActionListener{
 		}
 		//날짜추가
 		for(int day=1; day<=lastDay; day++) {
-			/*JButton lbl = new JButton(String.valueOf(day)); //라벨선언해주는데 String.value 는 형변환이다. JLabel을 가운데에 입력하게둔다.
+//			JButton lbl = new JButton(String.valueOf(day)); //라벨선언해주는데 String.value 는 형변환이다. JLabel을 가운데에 입력하게둔다.
 //			lbl.setHorizontalAlignment(SwingConstants.TOP);		//// 가운데 정렬
 //			lbl.setEditable(false);
-			lbl.setBackground(Color.WHITE);
+/*			lbl.setBackground(Color.WHITE);
 			lbl.setFont(fnt); //라벨에 폰트를 주입한다.
 			
 			lbl.addActionListener(new ActionListener() {
@@ -164,59 +168,56 @@ public class mainScreen extends JFrame implements ItemListener, ActionListener{
 			dayPane.add(lbl);
 		}
 	}*/
-			JButton lbl = new JButton();
-		    lbl.setLayout(new BorderLayout()); // 버튼의 레이아웃을 BorderLayout으로 설정합니다.
+			  JButton lbl = new JButton();
+			    lbl.setLayout(new BorderLayout()); // 버튼의 레이아웃을 BorderLayout으로 설정합니다.
 
-		    JLabel dayLabel = new JLabel(String.valueOf(day));
-		    dayLabel.setHorizontalAlignment(SwingConstants.RIGHT); // 날짜를 오른쪽 정렬합니다.
-		    lbl.add(dayLabel, BorderLayout.NORTH); // 날짜를 버튼의 상단에 추가합니다.
+			    JLabel dayLabel = new JLabel(String.valueOf(day));
+			    dayLabel.setHorizontalAlignment(SwingConstants.RIGHT); // 날짜를 오른쪽 정렬합니다.
+			    lbl.add(dayLabel, BorderLayout.NORTH); // 날짜를 버튼의 상단에 추가합니다.
 
-		    mainScreen_Control main_con = new mainScreen_Control();
-		    ArrayList<String> dbData = main_con.ConnectDB(year, month, day);
-		    StringBuilder sb = new StringBuilder();
-		    for (String item : dbData) {
-		        sb.append(item).append("\n");
-		    }
+			    StringBuilder scheduleBuilder = new StringBuilder();
+			    for (ArrayList<String> planInfo : result.get(0)) {
+			        if (planInfo.get(2).equals(String.valueOf(year)+ String.valueOf(month)+String.valueOf(day))) {
+			            String planTitle = planInfo.get(0);
+			            scheduleBuilder.append("- ").append(planTitle).append("\n");
+			     
+			        }
+			    }
+			    for (ArrayList<String> subjectInfo : result.get(1)) {
+			        if (subjectInfo.get(2).equals(String.valueOf(year)+ String.valueOf(month)+String.valueOf(day))) {
+			            String subTitle = subjectInfo.get(0);
+			            scheduleBuilder.append("+ ").append(subTitle).append("\n");
+			        }
+			    }
 
-		    String[] lines = sb.toString().split("\n");
-		    StringBuilder labelTextBuilder = new StringBuilder();
-		    for (String line : lines) {
-		    	if (line.length() > 8) {
-		            line = line.substring(0, 8) + "..";
-		        }
-		        labelTextBuilder.append(line).append("\n");
-		    }
-		    String labelText = labelTextBuilder.toString().trim();
+			    String scheduleText = scheduleBuilder.toString().trim();
+			    JLabel scheduleLabel = new JLabel("<html>" + scheduleText.replace("\n", "<br>") + "</html>");
+			    Font font = scheduleLabel.getFont();
+			    Font smallerFont = font.deriveFont(font.getSize() - 2f); // 폰트 크기를 2포인트 작게 설정
+			    scheduleLabel.setFont(smallerFont);
 
-		    JLabel scheduleLabel = new JLabel("<html>" + labelText.replace("\n", "<br>") + "</html>");
-		    System.out.println(labelText);
-		    Font font = scheduleLabel.getFont();
-		    Font smallerFont = font.deriveFont(font.getSize() - 2f); // 폰트 크기를 2포인트 작게 설정
-		    scheduleLabel.setFont(smallerFont);
-		    lbl.add(scheduleLabel, BorderLayout.CENTER); // 일정을 버튼의 중앙에 추가합니다.
-		    
-		    
-		    lbl.setBackground(Color.WHITE); 
-		    lbl.setFont(fnt); //라벨에 폰트를 주입한다.
-		    
-		    lbl.addActionListener(new ActionListener() {
-				
-				@Override
-				public void actionPerformed(ActionEvent e) {
-					// TODO Auto-generated method stub
-					new detail();
-				}
-			});
-			
-			
-			//출력하는 날짜에 대한 요일
-			date.set(Calendar.DATE, day); // 19 ->1
-			int w = date.get(Calendar.DAY_OF_WEEK); //요일
-			if(w ==1) lbl.setForeground(Color.red); //일월화수목금토 (1~7) 1은 일요일이므로 일요일에 red색깔
-			if(w ==7) lbl.setForeground(Color.blue); //7이므로 blue색깔
-			dayPane.add(lbl);
-			
-		}
+			    lbl.add(scheduleLabel, BorderLayout.CENTER); // 일정을 버튼의 중앙에 추가합니다.
+
+			    lbl.setBackground(Color.WHITE);
+			    lbl.setFont(fnt); // 버튼에 폰트를 설정합니다.
+
+			    lbl.addActionListener(new ActionListener() {
+			        @Override
+			        public void actionPerformed(ActionEvent e) {
+			            new detail();
+			        }
+			    });
+
+			    // 출력하는 날짜에 대한 요일
+			    date.set(Calendar.DATE, day);
+			    int w = date.get(Calendar.DAY_OF_WEEK);
+			    if (w == 1)
+			        lbl.setForeground(Color.RED); // 일요일은 빨간색으로 표시
+			    if (w == 7)
+			        lbl.setForeground(Color.BLUE); // 토요일은 파란색으로 표시
+
+			    dayPane.add(lbl);
+			}
 	}
 	
 	//월화수목금토일 설정
