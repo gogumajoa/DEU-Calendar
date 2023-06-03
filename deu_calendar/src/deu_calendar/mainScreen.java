@@ -11,6 +11,7 @@ import java.awt.event.ItemListener;
 import java.util.ArrayList;
 import java.util.Calendar;
 
+import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
@@ -22,6 +23,8 @@ import javax.swing.SwingConstants;
 
 import java.awt.SystemColor;
 import javax.swing.border.LineBorder;
+import javax.swing.JList;
+import javax.swing.AbstractListModel;
 
 public class mainScreen extends JFrame implements ItemListener, ActionListener{
 	Font fnt = new Font("굴림체", Font.BOLD, 15);
@@ -55,8 +58,6 @@ public class mainScreen extends JFrame implements ItemListener, ActionListener{
 	int month;
 	private final JLabel lblNewLabel = new JLabel("\uB3D9\uC758 \uCE98\uB9B0\uB354");
 	private final JLabel lblNewLabel_1 = new JLabel("\uC77C\uC815 \uB9AC\uC2A4\uD2B8");
-	private final JTextArea txtrTestTest = new JTextArea();
-	
 	
 	
 	public mainScreen() {
@@ -105,14 +106,22 @@ public class mainScreen extends JFrame implements ItemListener, ActionListener{
 		lblNewLabel_1.setBounds(61, 46, 91, 37);
 		
 		getContentPane().add(lblNewLabel_1);
-		txtrTestTest.setBorder(new LineBorder(new Color(0, 0, 0)));
-		txtrTestTest.setBackground(new Color(255, 255, 255));
-		txtrTestTest.setEditable(false);
-		txtrTestTest.setRows(10);
-		txtrTestTest.setText("TEST1\r\nTEST2");
-		txtrTestTest.setBounds(12, 89, 178, 539);
 		
-		getContentPane().add(txtrTestTest);
+		JList list = new JList();
+		// 임시 데이터 저장하기 위한 코드 (수정해서 사용해야 함)
+		list.setModel(new AbstractListModel() {
+			String[] values = new String[] {"\uC77C\uC815 1", "\uC77C\uC815 2", "\uC77C\uC815 3", "\uC77C\uC815 4"};
+			public int getSize() {
+				return values.length;
+			}
+			public Object getElementAt(int index) {
+				return values[index];
+			}
+		});
+		list.setBounds(27, 89, 150, 539);
+		list.setBorder(BorderFactory.createLineBorder(Color.BLACK)); // 테두리 선
+		list.setFixedCellHeight(40);
+		getContentPane().add(list);
 		setDay();	//setDay()메소드를 호출한다.
 		
 		
