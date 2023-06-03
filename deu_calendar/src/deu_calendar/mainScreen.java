@@ -67,7 +67,7 @@ public class mainScreen extends JFrame implements ItemListener, ActionListener{
 		year = date.get(Calendar.YEAR); // 캘린더에서 년을 받아와서 미리생성해놓은 year에 주입한다.
 		month = date.get(Calendar.MONTH)+1; //월을 받아와서 month에 대입한다. +1을 하는 이유는 0~11이라
 		getContentPane().setLayout(null);
-		selectPane.setBounds(202, 46, 729, 37);
+		selectPane.setBounds(701, 34, 387, 37);
 		
 		//상단
 		selectPane.setBackground(Color.WHITE); //백그라운드의 배경을 주입한다.
@@ -87,7 +87,7 @@ public class mainScreen extends JFrame implements ItemListener, ActionListener{
 		
 		//title호출
 		setCalendarTitle();		//일월화수목금토를 만들어놓은 메소드 setCalendarTitle을 호출한다.
-		centerPane.setBounds(202, 89, 729, 380);
+		centerPane.setBounds(202, 89, 886, 539);
 		titlePane.setBorder(new LineBorder(new Color(0, 0, 0)));
 		titlePane.setBackground(new Color(220, 220, 220));
 		centerPane.add(BorderLayout.NORTH, titlePane);	//센터패널의 위쪽에 title을 넣는다(일월화수목금토)
@@ -97,8 +97,8 @@ public class mainScreen extends JFrame implements ItemListener, ActionListener{
 		
 		//날짜만들기
 		centerPane.add(dayPane);
-		lblNewLabel.setFont(new Font("맑은 고딕", Font.BOLD, 33));
-		lblNewLabel.setBounds(407, 5, 226, 37);
+		lblNewLabel.setFont(new Font("맑은 고딕 Semilight", Font.BOLD, 33));
+		lblNewLabel.setBounds(464, 22, 226, 37);
 		
 		getContentPane().add(lblNewLabel);
 		lblNewLabel_1.setFont(new Font("맑은 고딕", Font.BOLD, 17));
@@ -110,7 +110,7 @@ public class mainScreen extends JFrame implements ItemListener, ActionListener{
 		txtrTestTest.setEditable(false);
 		txtrTestTest.setRows(10);
 		txtrTestTest.setText("TEST1\r\nTEST2");
-		txtrTestTest.setBounds(12, 89, 178, 380);
+		txtrTestTest.setBounds(12, 89, 178, 539);
 		
 		getContentPane().add(txtrTestTest);
 		setDay();	//setDay()메소드를 호출한다.
@@ -125,7 +125,7 @@ public class mainScreen extends JFrame implements ItemListener, ActionListener{
 		
 		//JFrame의 설정들
 		setLocation(450,200);
-		setSize(959, 518);
+		setSize(1130, 691);
 		setVisible(true);
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 	}
