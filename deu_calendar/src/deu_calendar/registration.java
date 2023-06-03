@@ -61,7 +61,7 @@ public class registration {
                 String insertPlantSql = "INSERT INTO PLAN (STUDENT_ID, REGIST_DATE, PLAN_TITLE, MEMO, REPEATVALUE) VALUES (?, ?, ?, ?, ?)";
                 PreparedStatement insertPlanStatement = con.prepareStatement(insertPlantSql);
                 insertPlanStatement.setInt(1, 20215030); //임의로 db 집어넣은 값 학번
-                insertPlanStatement.setInt(2, 20230201); //날짜 임의 값
+                insertPlanStatement.setInt(2, 202321); //날짜 임의 값
                 insertPlanStatement.setString(3, birngTitle()); //일정 명
                 insertPlanStatement.setString(4, bringMemo()); //메모
                 insertPlanStatement.setString(5, bringRepeat()); //반복값
