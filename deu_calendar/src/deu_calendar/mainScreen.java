@@ -10,6 +10,7 @@ import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -176,8 +177,12 @@ public class mainScreen extends JFrame implements ItemListener, ActionListener{
 			    lbl.add(dayLabel, BorderLayout.NORTH); // 날짜를 버튼의 상단에 추가합니다.
 
 			    StringBuilder scheduleBuilder = new StringBuilder();
+			    
+			    ArrayList<ArrayList<String>> sendlist = new ArrayList<>(); //detail로 보낼 정보들
+			    
 			    for (ArrayList<String> planInfo : result.get(0)) {
 			        if (planInfo.get(2).equals(String.valueOf(year)+ String.valueOf(month)+String.valueOf(day))) {
+			        	sendlist.add(planInfo);
 			            String planTitle = planInfo.get(0);
 			            scheduleBuilder.append("- ").append(planTitle).append("\n");
 			     
@@ -185,6 +190,7 @@ public class mainScreen extends JFrame implements ItemListener, ActionListener{
 			    }
 			    for (ArrayList<String> subjectInfo : result.get(1)) {
 			        if (subjectInfo.get(2).equals(String.valueOf(year)+ String.valueOf(month)+String.valueOf(day))) {
+			        	sendlist.add(subjectInfo);
 			            String subTitle = subjectInfo.get(0);
 			            scheduleBuilder.append("+ ").append(subTitle).append("\n");
 			        }
@@ -200,11 +206,15 @@ public class mainScreen extends JFrame implements ItemListener, ActionListener{
 
 			    lbl.setBackground(Color.WHITE);
 			    lbl.setFont(fnt); // 버튼에 폰트를 설정합니다.
+			    
+			 // ActionListener 내부에서 day 변수를 사용하기 위해 클래스 멤버 변수로 변경
+			    final int selectedDay = day;
 
 			    lbl.addActionListener(new ActionListener() {
 			        @Override
 			        public void actionPerformed(ActionEvent e) {
-			            new detail();
+			        	 String select_day= (String.valueOf(selectedDay));
+			        	 new detail(sendlist, select_day);
 			        }
 			    });
 

@@ -151,11 +151,11 @@ public class entry extends JFrame {
 				reg.bringMemo();
 				
 				// 선택된 라디오버튼 값 가져오기
-				JRadioButton selectBtn = null;
+				Repetiton = null;
 		        for (Enumeration<AbstractButton> buttons = BtnGroup.getElements(); buttons.hasMoreElements();) {
 		            JRadioButton button = (JRadioButton) buttons.nextElement();
 		            if (button.isSelected()) {
-		            	selectBtn = button;
+		            	Repetiton = button;
 		                break;
 		            }
 		        }
