@@ -160,6 +160,61 @@ public class mainScreen extends JFrame implements ItemListener, ActionListener{
 			if(w ==7) lbl.setForeground(Color.blue); //7ì´ë¯€ë¡œ blueìƒ‰ê¹”
 			dayPane.add(lbl);
 		}
+<<<<<<< Updated upstream
+=======
+	}*/
+			  JButton lbl = new JButton();
+			    lbl.setLayout(new BorderLayout()); // ¹öÆ°ÀÇ ·¹ÀÌ¾Æ¿ôÀ» BorderLayoutÀ¸·Î ¼³Á¤ÇÕ´Ï´Ù.
+
+			    JLabel dayLabel = new JLabel(String.valueOf(day));
+			    dayLabel.setHorizontalAlignment(SwingConstants.RIGHT); // ³¯Â¥¸¦ ¿À¸¥ÂÊ Á¤·ÄÇÕ´Ï´Ù.
+			    lbl.add(dayLabel, BorderLayout.NORTH); // ³¯Â¥¸¦ ¹öÆ°ÀÇ »ó´Ü¿¡ Ãß°¡ÇÕ´Ï´Ù.
+
+			    StringBuilder scheduleBuilder = new StringBuilder();
+			    for (ArrayList<String> planInfo : result.get(0)) {
+			        if (planInfo.get(2).equals(String.valueOf(year)+ String.valueOf(month)+String.valueOf(day))) {
+			            String planTitle = planInfo.get(0);
+			            scheduleBuilder.append("- ").append(planTitle).append("\n");
+			     
+			        }
+			    }
+			    for (ArrayList<String> subjectInfo : result.get(1)) {
+			        if (subjectInfo.get(2).equals(String.valueOf(year)+ String.valueOf(month)+String.valueOf(day))) {
+			            String subTitle = subjectInfo.get(0);
+			            scheduleBuilder.append("+ ").append(subTitle).append("\n");
+			        }
+			    }
+
+			    String scheduleText = scheduleBuilder.toString().trim();
+			    JLabel scheduleLabel = new JLabel("<html>" + scheduleText.replace("\n", "<br>") + "</html>");
+			    Font font = scheduleLabel.getFont();
+			    Font smallerFont = font.deriveFont(font.getSize() - 2f); // ÆùÆ® Å©±â¸¦ 2Æ÷ÀÎÆ® ÀÛ°Ô ¼³Á¤
+			    scheduleLabel.setFont(smallerFont);
+
+			    lbl.add(scheduleLabel, BorderLayout.CENTER); // ÀÏÁ¤À» ¹öÆ°ÀÇ Áß¾Ó¿¡ Ãß°¡ÇÕ´Ï´Ù.
+
+			    lbl.setBackground(Color.WHITE);
+			    lbl.setFont(fnt); // ¹öÆ°¿¡ ÆùÆ®¸¦ ¼³Á¤ÇÕ´Ï´Ù.
+
+			    lbl.addActionListener(new ActionListener() {
+			        @Override
+			        public void actionPerformed(ActionEvent e) {
+			            new detail();
+			        }
+			    });
+
+			    // Ãâ·ÂÇÏ´Â ³¯Â¥¿¡ ´ëÇÑ ¿äÀÏ
+			    date.set(Calendar.DATE, day);
+			    int w = date.get(Calendar.DAY_OF_WEEK);
+			    if (w == 1) 
+			    	lbl.setForeground(Color.RED); // ÀÏ¿äÀÏÀº »¡°£»öÀ¸·Î Ç¥½Ã
+			        
+			    if (w == 7)
+			        lbl.setForeground(Color.BLUE); // Åä¿äÀÏÀº ÆÄ¶õ»öÀ¸·Î Ç¥½Ã
+
+			    dayPane.add(lbl);
+			}
+>>>>>>> Stashed changes
 	}
 	//ì›”í™”ìˆ˜ëª©ê¸ˆí† ì¼ ì„¤ì •
 	public void setCalendarTitle() { //ë©”ì†Œë“œ
