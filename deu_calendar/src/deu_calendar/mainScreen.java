@@ -144,31 +144,7 @@ public class mainScreen extends JFrame implements ItemListener, ActionListener{
 			dayPane.add(lbl);
 		}
 		//날짜추가
-		for(int day=1; day<=lastDay; day++) {
-//			JButton lbl = new JButton(String.valueOf(day)); //라벨선언해주는데 String.value 는 형변환이다. JLabel을 가운데에 입력하게둔다.
-//			lbl.setHorizontalAlignment(SwingConstants.TOP);		//// 가운데 정렬
-//			lbl.setEditable(false);
-/*			lbl.setBackground(Color.WHITE);
-			lbl.setFont(fnt); //라벨에 폰트를 주입한다.
-			
-			lbl.addActionListener(new ActionListener() {
-				
-				@Override
-				public void actionPerformed(ActionEvent e) {
-					// TODO Auto-generated method stub
-					new detail();
-				}
-			});
-			
-			//출력하는 날짜에 대한 요일
-			date.set(Calendar.DATE, day); // 19 ->1
-			int w = date.get(Calendar.DAY_OF_WEEK); //요일
-			if(w ==1) lbl.setForeground(Color.red); //일월화수목금토 (1~7) 1은 일요일이므로 일요일에 red색깔
-			if(w ==7) lbl.setForeground(Color.blue); //7이므로 blue색깔
-			dayPane.add(lbl);
-		}
-	}*/
-			
+		for(int day=1; day<=lastDay; day++) {			
 			  	JButton lbl = new JButton();
 			    
 			    lbl.setLayout(new BorderLayout()); // 버튼의 레이아웃을 BorderLayout으로 설정합니다.
