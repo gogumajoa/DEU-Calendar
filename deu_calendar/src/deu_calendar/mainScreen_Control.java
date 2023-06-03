@@ -41,7 +41,7 @@ public class mainScreen_Control {
 	                planInfo.add(rs.getString("PLAN_TITLE"));
 	                planInfo.add(rs.getString("MEMO"));
 	                planInfo.add(String.valueOf(rs.getInt("REGIST_DATE")));
-	                planInfo.add(String.valueOf(rs.getInt("REPEATVALUE")));
+	                planInfo.add(rs.getString("REPEATVALUE"));
 
 	                planList.add(planInfo);
 	            }
