@@ -136,7 +136,7 @@ public class mainScreen extends JFrame implements ItemListener, ActionListener{
 		setSize(1130, 691);
 		setLocationRelativeTo(null); // 화면 중앙 정렬
 		setVisible(true);
-		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+		//setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 	}
 	//날짜셋팅
 	public void setDay() {
