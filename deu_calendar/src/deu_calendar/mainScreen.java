@@ -8,6 +8,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import java.util.ArrayList;
 import java.util.Calendar;
 
 import javax.swing.JButton;
@@ -25,6 +26,10 @@ import javax.swing.border.LineBorder;
 public class mainScreen extends JFrame implements ItemListener, ActionListener{
 	Font fnt = new Font("굴림체", Font.BOLD, 15);
 	Font fnt2 = new Font("굴림체", Font.BOLD, 12);
+	
+	mainScreen_Control controller = new mainScreen_Control();
+	int studentID=20215030;
+	ArrayList<ArrayList<ArrayList<String>>> result = controller.ConnectDB(studentID);
 	
 	
 	//상단
@@ -140,10 +145,10 @@ public class mainScreen extends JFrame implements ItemListener, ActionListener{
 		}
 		//날짜추가
 		for(int day=1; day<=lastDay; day++) {
-			JButton lbl = new JButton(String.valueOf(day)); //라벨선언해주는데 String.value 는 형변환이다. JLabel을 가운데에 입력하게둔다.
+//			JButton lbl = new JButton(String.valueOf(day)); //라벨선언해주는데 String.value 는 형변환이다. JLabel을 가운데에 입력하게둔다.
 //			lbl.setHorizontalAlignment(SwingConstants.TOP);		//// 가운데 정렬
 //			lbl.setEditable(false);
-			lbl.setBackground(Color.WHITE);
+/*			lbl.setBackground(Color.WHITE);
 			lbl.setFont(fnt); //라벨에 폰트를 주입한다.
 			
 			lbl.addActionListener(new ActionListener() {
@@ -162,7 +167,59 @@ public class mainScreen extends JFrame implements ItemListener, ActionListener{
 			if(w ==7) lbl.setForeground(Color.blue); //7이므로 blue색깔
 			dayPane.add(lbl);
 		}
+	}*/
+			  JButton lbl = new JButton();
+			    lbl.setLayout(new BorderLayout()); // 버튼의 레이아웃을 BorderLayout으로 설정합니다.
+
+			    JLabel dayLabel = new JLabel(String.valueOf(day));
+			    dayLabel.setHorizontalAlignment(SwingConstants.RIGHT); // 날짜를 오른쪽 정렬합니다.
+			    lbl.add(dayLabel, BorderLayout.NORTH); // 날짜를 버튼의 상단에 추가합니다.
+
+			    StringBuilder scheduleBuilder = new StringBuilder();
+			    for (ArrayList<String> planInfo : result.get(0)) {
+			        if (planInfo.get(2).equals(String.valueOf(year)+ String.valueOf(month)+String.valueOf(day))) {
+			            String planTitle = planInfo.get(0);
+			            scheduleBuilder.append("- ").append(planTitle).append("\n");
+			     
+			        }
+			    }
+			    for (ArrayList<String> subjectInfo : result.get(1)) {
+			        if (subjectInfo.get(2).equals(String.valueOf(year)+ String.valueOf(month)+String.valueOf(day))) {
+			            String subTitle = subjectInfo.get(0);
+			            scheduleBuilder.append("+ ").append(subTitle).append("\n");
+			        }
+			    }
+
+			    String scheduleText = scheduleBuilder.toString().trim();
+			    JLabel scheduleLabel = new JLabel("<html>" + scheduleText.replace("\n", "<br>") + "</html>");
+			    Font font = scheduleLabel.getFont();
+			    Font smallerFont = font.deriveFont(font.getSize() - 2f); // 폰트 크기를 2포인트 작게 설정
+			    scheduleLabel.setFont(smallerFont);
+
+			    lbl.add(scheduleLabel, BorderLayout.CENTER); // 일정을 버튼의 중앙에 추가합니다.
+
+			    lbl.setBackground(Color.WHITE);
+			    lbl.setFont(fnt); // 버튼에 폰트를 설정합니다.
+
+			    lbl.addActionListener(new ActionListener() {
+			        @Override
+			        public void actionPerformed(ActionEvent e) {
+			            new detail();
+			        }
+			    });
+
+			    // 출력하는 날짜에 대한 요일
+			    date.set(Calendar.DATE, day);
+			    int w = date.get(Calendar.DAY_OF_WEEK);
+			    if (w == 1)
+			        lbl.setForeground(Color.RED); // 일요일은 빨간색으로 표시
+			    if (w == 7)
+			        lbl.setForeground(Color.BLUE); // 토요일은 파란색으로 표시
+
+			    dayPane.add(lbl);
+			}
 	}
+	
 	//월화수목금토일 설정
 	public void setCalendarTitle() { //메소드
 		for(int i =0; i <title.length; i++) { //만들어준 배열의 수만큼 돌린다.

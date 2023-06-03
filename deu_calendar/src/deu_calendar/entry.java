@@ -25,6 +25,7 @@ public class entry extends JFrame {
 	private JPanel contentPane;
 	public static JTextField textField;
 	public static JTextArea textArea;
+	public static JRadioButton Repetiton;
 
 	/**
 	 * Launch the application.
@@ -144,12 +145,10 @@ public class entry extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				// 일정 제목 값 받아오기
-				reg.birngTitle(textField.getText());
-				System.out.println(reg.birngTitle(textField.getText()));
+				reg.birngTitle();
 				
 				// 일정 메모 값 받아오기
-				reg.bringMemo(textArea.getText());
-				System.out.println(reg.bringMemo(textArea.getText()));
+				reg.bringMemo();
 				
 				// 선택된 라디오버튼 값 가져오기
 				JRadioButton selectBtn = null;
@@ -160,8 +159,7 @@ public class entry extends JFrame {
 		                break;
 		            }
 		        }
-				System.out.println(selectBtn.getActionCommand());
-				
+				reg.regist(); // DB에 입력 값 삽입
 				dispose();
 			} // 등록 버튼 클릭
 		});
