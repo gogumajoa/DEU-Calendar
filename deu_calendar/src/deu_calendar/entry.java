@@ -51,7 +51,7 @@ public class entry extends JFrame {
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 724, 624);
-		setLocation(610,200);
+		setLocationRelativeTo(null); // 화면 중앙 정렬
 		setVisible(true);
 		contentPane = new JPanel();
 		contentPane.setBackground(new Color(255, 255, 255));
