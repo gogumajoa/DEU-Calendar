@@ -1,7 +1,8 @@
 package deu_calendar;
 
+import java.awt.Font;
 import java.awt.EventQueue;
-
+import javax.swing.JScrollPane;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
@@ -53,16 +54,20 @@ public class detail extends JFrame {
         System.out.println(data);
         setResizable(false);
         setTitle("일정 상세");
-        setBounds(100, 100, 668, 503);
-        setLocation(610,200);
+        int tableWidth = 550; // JTable의 가로 크기
+        int tableHeight = 300; // JTable의 세로 크기
+        int tableX = 50; // JTable의 x 좌표
+        int tableY = 110; // JTable의 y 좌표
+        int contentPaneWidth = Math.max(tableX + tableWidth + 20, 668); // JPanel의 가로 크기 계산 (20은 여백)
+        int contentPaneHeight = Math.max(tableY + tableHeight + 20, 503); // JPanel의 세로 크기 계산 (20은 여백)
+        setBounds(100, 100, contentPaneWidth, contentPaneHeight);
+        setLocation(610, 200);
         setVisible(true);
         contentPane = new JPanel();
         contentPane.setBackground(SystemColor.window);
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-
         setContentPane(contentPane);
         contentPane.setLayout(null);
-
 
         JButton btnNewButton = new JButton("일정 등록");
         btnNewButton.addMouseListener(new MouseAdapter() {
@@ -71,82 +76,83 @@ public class detail extends JFrame {
                 new entry();
             }
         });
-        btnNewButton.setBounds(420, 60, 94, 28);
+        btnNewButton.setBounds(513, 60, 87, 28);
         contentPane.add(btnNewButton);
 
         JLabel lblNewLabel = new JLabel();
         String dayString = select_day;
         lblNewLabel.setText(dayString);
-        lblNewLabel.setBounds(260, 20, 65, 37);
+        lblNewLabel.setBounds(325, 20, 65, 37);
+        
+        Font font = new Font("Arial", Font.BOLD, 17); // 15은 폰트 크기를 나타냅니다.
+        lblNewLabel.setFont(font);
         contentPane.add(lblNewLabel);
-
 
         model = new DefaultTableModel();
         table = new JTable(model);
-        table.setBounds(50, 100, 400, 200);
-        contentPane.add(table);
+        
+        JScrollPane scrollPane = new JScrollPane(table);
+        scrollPane.setBounds(tableX, tableY, tableWidth, tableHeight);
+        
+        table.setBorder(null);
+        table.setBounds(tableX, tableY, tableWidth, tableHeight);
 
         // Add columns to the table
         model.addColumn("Plan");
         model.addColumn("Memo");
         model.addColumn("수정");
 
-        
-		table.getColumnModel().getColumn(2).setCellRenderer(new TableCell());
-		table.getColumnModel().getColumn(2).setCellEditor(new TableCell());
-        
+        table.getColumnModel().getColumn(2).setCellRenderer(new TableCell());
+        table.getColumnModel().getColumn(2).setCellEditor(new TableCell());
+
         // Add rows to the table using the data ArrayList
         for (ArrayList<String> row : data) {
             model.addRow(new Object[] { row.get(0), row.get(1), "수정" });
         }
-        
+
+        // 열의 너비 조절
+        table.getColumnModel().getColumn(0).setPreferredWidth(200);  // 첫 번째 열의 너비를 100으로 설정
+        table.getColumnModel().getColumn(1).setPreferredWidth(370);  // 두 번째 열의 너비를 200으로 설정
+        table.getColumnModel().getColumn(2).setPreferredWidth(100);
+        // 행의 높이 조절
+        table.setRowHeight(30);  // 첫 번째 행의 높이를 30으로 설정
+
+        contentPane.add(scrollPane);
     }
+    
     class TableCell extends AbstractCellEditor implements TableCellEditor, TableCellRenderer {
 
-		JButton jb;
+        JButton jb;
 
-		public TableCell() {
-		    jb = new JButton("수정");
+        public TableCell() {
+            jb = new JButton("수정");
 
-		    jb.addMouseListener(new MouseAdapter() {
-		        @Override
-		        public void mouseClicked(MouseEvent e) {
-		            // 클릭 이벤트 처리 로직을 작성하세요
-		            // 수정 버튼이 클릭되었을 때 수행할 동작을 여기에 추가합니다
-		            // 예시: 새로운 change 인스턴스를 생성하여 변경 작업을 수행
-		            new change();
-		        }
-		    });
-		}
+            jb.addMouseListener(new MouseAdapter() {
+                @Override
+                public void mouseClicked(MouseEvent e) {
+                    // 클릭 이벤트 처리 로직을 작성하세요
+                    // 수정 버튼이 클릭되었을 때 수행할 동작을 여기에 추가합니다
+                    // 예시: 새로운 change 인스턴스를 생성하여 변경 작업을 수행
+                    new change();
+                }
+            });
+        }
 
-		/*
-		 * JButton btnNewButton_1_1 = new JButton("수정");
-		 * btnNewButton_1_1.addMouseListener(new MouseAdapter() {
-		 * 
-		 * @Override public void mouseClicked(MouseEvent e) { new change(); } // 수정 버튼
-		 * 클릭 }); btnNewButton_1_1.setBounds(538, 255, 65, 50);
-		 * contentPane.add(btnNewButton_1_1);
-		 */
-		
-		@Override
-		public Object getCellEditorValue() {
-			// TODO Auto-generated method stub
-			return null;
-		}
+        @Override
+        public Object getCellEditorValue() {
+            return null;
+        }
 
-		@Override
-		public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus,
-				int row, int column) {
-			// TODO Auto-generated method stub
-			return jb;
-		}
+        @Override
+        public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected,
+                boolean hasFocus, int row, int column) {
+            return jb;
+        }
 
-		@Override
-		public Component getTableCellEditorComponent(JTable table, Object value, boolean isSelected, int row,
-				int column) {
-			// TODO Auto-generated method stub
-			return jb;
-		}
-
-	}
+        @Override
+        public Component getTableCellEditorComponent(JTable table, Object value, boolean isSelected, int row,
+                int column) {
+            return jb;
+        }
+    }
 }
