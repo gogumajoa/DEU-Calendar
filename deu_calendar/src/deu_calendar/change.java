@@ -46,7 +46,7 @@ public class change extends JFrame {
 		setResizable(false);
 		setTitle("\uC77C\uC815 \uC218\uC815");
 		setSize(724,624);
-		setLocation(610,200);
+		setLocationRelativeTo(null); // 화면 중앙 정렬
 		setVisible(true);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		contentPane = new JPanel();

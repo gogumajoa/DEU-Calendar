@@ -42,9 +42,9 @@ public class detail extends JFrame {
 	public detail() {
 		setResizable(false);
 		setTitle("\uC0C1\uC138 \uC77C\uC815");
-//		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 668, 503);
-		setLocation(610,200);
+		setLocationRelativeTo(null); // 화면 중앙 정렬
 		setVisible(true);
 		contentPane = new JPanel();
 		contentPane.setBackground(SystemColor.window);
