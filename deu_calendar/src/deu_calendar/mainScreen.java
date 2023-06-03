@@ -124,8 +124,8 @@ public class mainScreen extends JFrame implements ItemListener, ActionListener{
 		monthCombo.addItemListener(this);
 		
 		//JFrame의 설정들
-		setLocation(450,200);
 		setSize(1130, 691);
+		setLocationRelativeTo(null); // 화면 중앙 정렬
 		setVisible(true);
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 	}
