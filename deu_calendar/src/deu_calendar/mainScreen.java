@@ -8,7 +8,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
-import java.util.ArrayList;
 import java.util.Calendar;
 
 import javax.swing.JButton;
@@ -24,34 +23,30 @@ import java.awt.SystemColor;
 import javax.swing.border.LineBorder;
 
 public class mainScreen extends JFrame implements ItemListener, ActionListener{
-	Font fnt = new Font("±¼¸²Ã¼", Font.BOLD, 15);
-	Font fnt2 = new Font("±¼¸²Ã¼", Font.BOLD, 12);
-	
-	mainScreen_Control controller = new mainScreen_Control();
-	int studentID=20215030;
-	ArrayList<ArrayList<ArrayList<String>>> result = controller.ConnectDB(studentID);
+	Font fnt = new Font("êµ´ë¦¼ì²´", Font.BOLD, 15);
+	Font fnt2 = new Font("êµ´ë¦¼ì²´", Font.BOLD, 12);
 	
 	
-	//»ó´Ü
-	JPanel selectPane = new JPanel(); //ÆĞ³Î»ı¼º
-		JButton prevBtn = new JButton("¢¸"); //ÀÌÀü¹öÆ°
-		JButton nextBtn = new JButton("¢º"); //´ÙÀ½¹öÆ°
-		JComboBox<Integer> yearCombo = new JComboBox<Integer>(); //³âµµ ÄŞº¸¹Ú½ºÃß°¡
-		JComboBox<Integer> monthCombo = new JComboBox<Integer>(); //¿ù ÄŞº¸¹Ú½º Ãß°¡
-		JLabel yearLBl = new JLabel("³â");  //"³â"À» Ç¥½ÃÇÒ ¶óº§ Ãß°¡
-		JLabel monthLBl = new JLabel("¿ù"); //"¿ù"À» Ç¥½ÃÇÒ ¶óº§Ãß°¡
+	//ìƒë‹¨
+	JPanel selectPane = new JPanel(); //íŒ¨ë„ìƒì„±
+		JButton prevBtn = new JButton("â—€"); //ì´ì „ë²„íŠ¼
+		JButton nextBtn = new JButton("â–¶"); //ë‹¤ìŒë²„íŠ¼
+		JComboBox<Integer> yearCombo = new JComboBox<Integer>(); //ë…„ë„ ì½¤ë³´ë°•ìŠ¤ì¶”ê°€
+		JComboBox<Integer> monthCombo = new JComboBox<Integer>(); //ì›” ì½¤ë³´ë°•ìŠ¤ ì¶”ê°€
+		JLabel yearLBl = new JLabel("ë…„");  //"ë…„"ì„ í‘œì‹œí•  ë¼ë²¨ ì¶”ê°€
+		JLabel monthLBl = new JLabel("ì›”"); //"ì›”"ì„ í‘œì‹œí•  ë¼ë²¨ì¶”ê°€
 		
-	//°¡¿îµ¥
-	JPanel centerPane = new JPanel(new BorderLayout()); //°¡¿îµ¥ ÆĞ³ÎÀ» »ı¼ºÇÏ°í borderLayoutÀ¸·Î Àâ¾ÆÁØ´Ù. 
-														//borderLayout : »óÇÏÁÂ¿ì °¡¿îµ¥·Î ³ª´µ¾î¼­ layoutÀ» Àâ´Â°Í
-		JPanel titlePane = new JPanel(new GridLayout(1, 7));// Å¸ÀÌÆ²À» »ı¼º½ÃÅ³ ÆĞ³ÎÀ» »ı¼ºÇÏ°í GridLayoutÀ¸·Î Àâ¾ÆÁØ´Ù.
-															// GridLayout: ÁöÁ¤µÈ ¼öÀÇ Çà°ú ¿­À» »ı¼ºÇÏ´Â ·¹ÀÌ¾Æ¿ôÀÌ´Ù 1Çà 7¿­ÀÌ¹Ç·Î ÀÏ,¿ù,È­,¼ö,¸ñ,±İ,Åä °¡ µé¾î°¡°ÔµÈ´Ù.
-		String[] title = {"ÀÏ", "¿ù", "È­", "¼ö", "¸ñ", "±İ", "Åä"};
-		JPanel dayPane = new JPanel(new GridLayout(0, 7)); // À§¿Í µ¿ÀÏÇÏ¸ç ³¯Â¥°¡ ³ª¿À°Ô µÈ´Ù. 
+	//ê°€ìš´ë°
+	JPanel centerPane = new JPanel(new BorderLayout()); //ê°€ìš´ë° íŒ¨ë„ì„ ìƒì„±í•˜ê³  borderLayoutìœ¼ë¡œ ì¡ì•„ì¤€ë‹¤. 
+														//borderLayout : ìƒí•˜ì¢Œìš° ê°€ìš´ë°ë¡œ ë‚˜ë‰˜ì–´ì„œ layoutì„ ì¡ëŠ”ê²ƒ
+		JPanel titlePane = new JPanel(new GridLayout(1, 7));// íƒ€ì´í‹€ì„ ìƒì„±ì‹œí‚¬ íŒ¨ë„ì„ ìƒì„±í•˜ê³  GridLayoutìœ¼ë¡œ ì¡ì•„ì¤€ë‹¤.
+															// GridLayout: ì§€ì •ëœ ìˆ˜ì˜ í–‰ê³¼ ì—´ì„ ìƒì„±í•˜ëŠ” ë ˆì´ì•„ì›ƒì´ë‹¤ 1í–‰ 7ì—´ì´ë¯€ë¡œ ì¼,ì›”,í™”,ìˆ˜,ëª©,ê¸ˆ,í†  ê°€ ë“¤ì–´ê°€ê²Œëœë‹¤.
+		String[] title = {"ì¼", "ì›”", "í™”", "ìˆ˜", "ëª©", "ê¸ˆ", "í† "};
+		JPanel dayPane = new JPanel(new GridLayout(0, 7)); // ìœ„ì™€ ë™ì¼í•˜ë©° ë‚ ì§œê°€ ë‚˜ì˜¤ê²Œ ëœë‹¤. 
 	
-	//´Ş·Â°ü·Ã µ¥ÀÌÅÍ
-	Calendar date; //´Ş·ÂÁÖÀÔ
-	int year; //³â°ú, ¿ù ÁÖÀÔ
+	//ë‹¬ë ¥ê´€ë ¨ ë°ì´í„°
+	Calendar date; //ë‹¬ë ¥ì£¼ì…
+	int year; //ë…„ê³¼, ì›” ì£¼ì…
 	int month;
 	private final JLabel lblNewLabel = new JLabel("\uB3D9\uC758 \uCE98\uB9B0\uB354");
 	private final JLabel lblNewLabel_1 = new JLabel("\uC77C\uC815 \uB9AC\uC2A4\uD2B8");
@@ -60,48 +55,47 @@ public class mainScreen extends JFrame implements ItemListener, ActionListener{
 	
 	
 	public mainScreen() {
-		super("µ¿ÀÇ Ä¶¸°´õ");
-		setResizable(false);
+		super("ë™ì˜ ìº˜ë¦°ë”");
 		getContentPane().setBackground(Color.WHITE);
-		date = Calendar.getInstance();//ÇöÀçÀÇ ³¯Â¥ ½Ã°£ °´Ã¼ »ı¼º + °´Ã¼¸¦ ¹Ş¾Æ¿Â´Ù.
-		year = date.get(Calendar.YEAR); // Ä¶¸°´õ¿¡¼­ ³âÀ» ¹Ş¾Æ¿Í¼­ ¹Ì¸®»ı¼ºÇØ³õÀº year¿¡ ÁÖÀÔÇÑ´Ù.
-		month = date.get(Calendar.MONTH)+1; //¿ùÀ» ¹Ş¾Æ¿Í¼­ month¿¡ ´ëÀÔÇÑ´Ù. +1À» ÇÏ´Â ÀÌÀ¯´Â 0~11ÀÌ¶ó
+		date = Calendar.getInstance();//í˜„ì¬ì˜ ë‚ ì§œ ì‹œê°„ ê°ì²´ ìƒì„± + ê°ì²´ë¥¼ ë°›ì•„ì˜¨ë‹¤.
+		year = date.get(Calendar.YEAR); // ìº˜ë¦°ë”ì—ì„œ ë…„ì„ ë°›ì•„ì™€ì„œ ë¯¸ë¦¬ìƒì„±í•´ë†“ì€ yearì— ì£¼ì…í•œë‹¤.
+		month = date.get(Calendar.MONTH)+1; //ì›”ì„ ë°›ì•„ì™€ì„œ monthì— ëŒ€ì…í•œë‹¤. +1ì„ í•˜ëŠ” ì´ìœ ëŠ” 0~11ì´ë¼
 		getContentPane().setLayout(null);
 		selectPane.setBounds(202, 46, 729, 37);
 		
-		//»ó´Ü
-		selectPane.setBackground(Color.WHITE); //¹é±×¶ó¿îµåÀÇ ¹è°æÀ» ÁÖÀÔÇÑ´Ù.
+		//ìƒë‹¨
+		selectPane.setBackground(Color.WHITE); //ë°±ê·¸ë¼ìš´ë“œì˜ ë°°ê²½ì„ ì£¼ì…í•œë‹¤.
 		selectPane.add(prevBtn); prevBtn.setFont(fnt);  
 		selectPane.add(yearCombo); yearCombo.setFont(fnt);
 		selectPane.add(yearLBl); yearLBl.setFont(fnt);
 		selectPane.add(monthCombo); monthCombo.setFont(fnt);
 		selectPane.add(monthLBl); monthLBl.setFont(fnt);
-		selectPane.add(nextBtn); nextBtn.setFont(fnt);  //ÆĞ³Î¿¡ ´ëÀÔÇÑÈÄ ÀÛ¼ºÇÑ font¸¦ ÁÖÀÔÇÑ´Ù.
+		selectPane.add(nextBtn); nextBtn.setFont(fnt);  //íŒ¨ë„ì— ëŒ€ì…í•œí›„ ì‘ì„±í•œ fontë¥¼ ì£¼ì…í•œë‹¤.
 		
-		getContentPane().add(selectPane); // borderLayout : »óÇÏÁÂ¿ì °¡¿îµ¥·Î ³ª´µ¾î¼­ layoutÀ» Àâ´Â°Í
-											// À§¿¡ ´ëÀÔ½ÃÅ°°í selectPaneÀ» ³Ö´Â´Ù.
+		getContentPane().add(selectPane); // borderLayout : ìƒí•˜ì¢Œìš° ê°€ìš´ë°ë¡œ ë‚˜ë‰˜ì–´ì„œ layoutì„ ì¡ëŠ”ê²ƒ
+											// ìœ„ì— ëŒ€ì…ì‹œí‚¤ê³  selectPaneì„ ë„£ëŠ”ë‹¤.
 		
-		//ÇöÀç ³â, ¿ù ¼¼ÆÃ
+		//í˜„ì¬ ë…„, ì›” ì„¸íŒ…
 		setYear();	
 		setMonth();
 		
-		//titleÈ£Ãâ
-		setCalendarTitle();		//ÀÏ¿ùÈ­¼ö¸ñ±İÅä¸¦ ¸¸µé¾î³õÀº ¸Ş¼Òµå setCalendarTitleÀ» È£ÃâÇÑ´Ù.
+		//titleí˜¸ì¶œ
+		setCalendarTitle();		//ì¼ì›”í™”ìˆ˜ëª©ê¸ˆí† ë¥¼ ë§Œë“¤ì–´ë†“ì€ ë©”ì†Œë“œ setCalendarTitleì„ í˜¸ì¶œí•œë‹¤.
 		centerPane.setBounds(202, 89, 729, 380);
 		titlePane.setBorder(new LineBorder(new Color(0, 0, 0)));
 		titlePane.setBackground(new Color(220, 220, 220));
-		centerPane.add(BorderLayout.NORTH, titlePane);	//¼¾ÅÍÆĞ³ÎÀÇ À§ÂÊ¿¡ titleÀ» ³Ö´Â´Ù(ÀÏ¿ùÈ­¼ö¸ñ±İÅä)
+		centerPane.add(BorderLayout.NORTH, titlePane);	//ì„¼í„°íŒ¨ë„ì˜ ìœ„ìª½ì— titleì„ ë„£ëŠ”ë‹¤(ì¼ì›”í™”ìˆ˜ëª©ê¸ˆí† )
 		getContentPane().add(centerPane);
 		dayPane.setBorder(new LineBorder(new Color(0, 0, 0)));
 		dayPane.setBackground(Color.WHITE);
 		
-		//³¯Â¥¸¸µé±â
+		//ë‚ ì§œë§Œë“¤ê¸°
 		centerPane.add(dayPane);
-		lblNewLabel.setFont(new Font("¸¼Àº °íµñ", Font.BOLD, 33));
+		lblNewLabel.setFont(new Font("ë§‘ì€ ê³ ë”•", Font.BOLD, 33));
 		lblNewLabel.setBounds(407, 5, 226, 37);
 		
 		getContentPane().add(lblNewLabel);
-		lblNewLabel_1.setFont(new Font("¸¼Àº °íµñ", Font.BOLD, 17));
+		lblNewLabel_1.setFont(new Font("ë§‘ì€ ê³ ë”•", Font.BOLD, 17));
 		lblNewLabel_1.setBounds(61, 46, 91, 37);
 		
 		getContentPane().add(lblNewLabel_1);
@@ -113,43 +107,42 @@ public class mainScreen extends JFrame implements ItemListener, ActionListener{
 		txtrTestTest.setBounds(12, 89, 178, 380);
 		
 		getContentPane().add(txtrTestTest);
-		setDay();	//setDay()¸Ş¼Òµå¸¦ È£ÃâÇÑ´Ù.
+		setDay();	//setDay()ë©”ì†Œë“œë¥¼ í˜¸ì¶œí•œë‹¤.
 		
 		
-		//---------------------------±â´ÉÀÌº¥Æ®¸¦ Ãß°¡-------------------------------
+		//---------------------------ê¸°ëŠ¥ì´ë²¤íŠ¸ë¥¼ ì¶”ê°€-------------------------------
 		prevBtn.addActionListener(this);
 		nextBtn.addActionListener(this);
-		//³â¿ù ÀÌº¥Æ® ´Ù½Ãµî·Ï
+		//ë…„ì›” ì´ë²¤íŠ¸ ë‹¤ì‹œë“±ë¡
 		yearCombo.addItemListener(this);
 		monthCombo.addItemListener(this);
 		
-		//JFrameÀÇ ¼³Á¤µé
-		setLocation(450,200);
+		//JFrameì˜ ì„¤ì •ë“¤
 		setSize(959, 518);
 		setVisible(true);
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 	}
-	//³¯Â¥¼ÂÆÃ
+	//ë‚ ì§œì…‹íŒ…
 	public void setDay() {
-		//¿äÀÏ
-		date.set(year, month-1, 1); //date¸¦ ¼¼ÆÃÇÏ´Âµ¥, ÀÏ(day)¸¦ 1·Î ¼¼ÆÃÇÑ´Ù.
-		int week = date.get(Calendar.DAY_OF_WEEK); //DAY_OF_WEEK´Â ÀÏ¿ùÈ­¼ö¸ñ±İÅäÀÌ¸ç ÀÌµ¥ÀÌÅÍ¸¦ ¹Ş¾Æ¿Í¼­ week¿¡ ³Ö´Â´Ù.
-		//¸¶Áö¸·³¯
-		int lastDay = date.getActualMaximum(Calendar.DATE); //getActualMaximum ´Â ³¯Â¥°¡ ¼ÂÆÃ µÈ Calender °¡ °¡Áú¼ö ÀÖ´Â °ª
-															//getMaximum ´Â Calender ÀÚÃ¼°¡ ÃÖ´ë·Î °¡Áú¼ö ÀÖ´Â °ª
-															//¸¶Áö¸·³¯À» ºÒ·¯¿Â´Ù.
-		//°ø¹é
-		for(int s=1; s<week; s++) {  //¹İº¹¹®À» µ¹¸°´Ù.
-			JLabel lbl = new JLabel(" "); //µé¿©¾²±â
+		//ìš”ì¼
+		date.set(year, month-1, 1); //dateë¥¼ ì„¸íŒ…í•˜ëŠ”ë°, ì¼(day)ë¥¼ 1ë¡œ ì„¸íŒ…í•œë‹¤.
+		int week = date.get(Calendar.DAY_OF_WEEK); //DAY_OF_WEEKëŠ” ì¼ì›”í™”ìˆ˜ëª©ê¸ˆí† ì´ë©° ì´ë°ì´í„°ë¥¼ ë°›ì•„ì™€ì„œ weekì— ë„£ëŠ”ë‹¤.
+		//ë§ˆì§€ë§‰ë‚ 
+		int lastDay = date.getActualMaximum(Calendar.DATE); //getActualMaximum ëŠ” ë‚ ì§œê°€ ì…‹íŒ… ëœ Calender ê°€ ê°€ì§ˆìˆ˜ ìˆëŠ” ê°’
+															//getMaximum ëŠ” Calender ìì²´ê°€ ìµœëŒ€ë¡œ ê°€ì§ˆìˆ˜ ìˆëŠ” ê°’
+															//ë§ˆì§€ë§‰ë‚ ì„ ë¶ˆëŸ¬ì˜¨ë‹¤.
+		//ê³µë°±
+		for(int s=1; s<week; s++) {  //ë°˜ë³µë¬¸ì„ ëŒë¦°ë‹¤.
+			JLabel lbl = new JLabel(" "); //ë“¤ì—¬ì“°ê¸°
 			dayPane.add(lbl);
 		}
-		//³¯Â¥Ãß°¡
+		//ë‚ ì§œì¶”ê°€
 		for(int day=1; day<=lastDay; day++) {
-//			JButton lbl = new JButton(String.valueOf(day)); //¶óº§¼±¾ğÇØÁÖ´Âµ¥ String.value ´Â Çüº¯È¯ÀÌ´Ù. JLabelÀ» °¡¿îµ¥¿¡ ÀÔ·ÂÇÏ°ÔµĞ´Ù.
-//			lbl.setHorizontalAlignment(SwingConstants.TOP);		//// °¡¿îµ¥ Á¤·Ä
+			JButton lbl = new JButton(String.valueOf(day)); //ë¼ë²¨ì„ ì–¸í•´ì£¼ëŠ”ë° String.value ëŠ” í˜•ë³€í™˜ì´ë‹¤. JLabelì„ ê°€ìš´ë°ì— ì…ë ¥í•˜ê²Œë‘”ë‹¤.
+//			lbl.setHorizontalAlignment(SwingConstants.TOP);		//// ê°€ìš´ë° ì •ë ¬
 //			lbl.setEditable(false);
-/*			lbl.setBackground(Color.WHITE);
-			lbl.setFont(fnt); //¶óº§¿¡ ÆùÆ®¸¦ ÁÖÀÔÇÑ´Ù.
+			lbl.setBackground(Color.WHITE);
+			lbl.setFont(fnt); //ë¼ë²¨ì— í°íŠ¸ë¥¼ ì£¼ì…í•œë‹¤.
 			
 			lbl.addActionListener(new ActionListener() {
 				
@@ -160,31 +153,20 @@ public class mainScreen extends JFrame implements ItemListener, ActionListener{
 				}
 			});
 			
-			//Ãâ·ÂÇÏ´Â ³¯Â¥¿¡ ´ëÇÑ ¿äÀÏ
+			//ì¶œë ¥í•˜ëŠ” ë‚ ì§œì— ëŒ€í•œ ìš”ì¼
 			date.set(Calendar.DATE, day); // 19 ->1
-			int w = date.get(Calendar.DAY_OF_WEEK); //¿äÀÏ
-			if(w ==1) lbl.setForeground(Color.red); //ÀÏ¿ùÈ­¼ö¸ñ±İÅä (1~7) 1Àº ÀÏ¿äÀÏÀÌ¹Ç·Î ÀÏ¿äÀÏ¿¡ red»ö±ò
-			if(w ==7) lbl.setForeground(Color.blue); //7ÀÌ¹Ç·Î blue»ö±ò
+			int w = date.get(Calendar.DAY_OF_WEEK); //ìš”ì¼
+			if(w ==1) lbl.setForeground(Color.red); //ì¼ì›”í™”ìˆ˜ëª©ê¸ˆí†  (1~7) 1ì€ ì¼ìš”ì¼ì´ë¯€ë¡œ ì¼ìš”ì¼ì— redìƒ‰ê¹”
+			if(w ==7) lbl.setForeground(Color.blue); //7ì´ë¯€ë¡œ blueìƒ‰ê¹”
 			dayPane.add(lbl);
 		}
+<<<<<<< Updated upstream
+=======
 	}*/
-			
-			  	JButton lbl = new JButton();
-			    
+			  JButton lbl = new JButton();
 			    lbl.setLayout(new BorderLayout()); // ¹öÆ°ÀÇ ·¹ÀÌ¾Æ¿ôÀ» BorderLayoutÀ¸·Î ¼³Á¤ÇÕ´Ï´Ù.
 
 			    JLabel dayLabel = new JLabel(String.valueOf(day));
-			    
-			    // Ãâ·ÂÇÏ´Â ³¯Â¥¿¡ ´ëÇÑ ¿äÀÏ
-			    date.set(Calendar.DATE, day);
-			    int w = date.get(Calendar.DAY_OF_WEEK);
-			    if (w == 1)
-			    	dayLabel.setForeground(Color.RED); // ÀÏ¿äÀÏÀº »¡°£»öÀ¸·Î Ç¥½Ã
-			    if (w == 7)
-			    	dayLabel.setForeground(Color.BLUE); // Åä¿äÀÏÀº ÆÄ¶õ»öÀ¸·Î Ç¥½Ã
-
-			    dayPane.add(lbl);
-			    
 			    dayLabel.setHorizontalAlignment(SwingConstants.RIGHT); // ³¯Â¥¸¦ ¿À¸¥ÂÊ Á¤·ÄÇÕ´Ï´Ù.
 			    lbl.add(dayLabel, BorderLayout.NORTH); // ³¯Â¥¸¦ ¹öÆ°ÀÇ »ó´Ü¿¡ Ãß°¡ÇÕ´Ï´Ù.
 
@@ -208,15 +190,12 @@ public class mainScreen extends JFrame implements ItemListener, ActionListener{
 			    Font font = scheduleLabel.getFont();
 			    Font smallerFont = font.deriveFont(font.getSize() - 2f); // ÆùÆ® Å©±â¸¦ 2Æ÷ÀÎÆ® ÀÛ°Ô ¼³Á¤
 			    scheduleLabel.setFont(smallerFont);
-			    scheduleLabel.setForeground(Color.BLUE);	// ÀÏÁ¤³»¿ë ±Û¾¾ »ö¼³Á¤
+
 			    lbl.add(scheduleLabel, BorderLayout.CENTER); // ÀÏÁ¤À» ¹öÆ°ÀÇ Áß¾Ó¿¡ Ãß°¡ÇÕ´Ï´Ù.
 
-			    
-			    lbl.setBackground(Color.white);
+			    lbl.setBackground(Color.WHITE);
 			    lbl.setFont(fnt); // ¹öÆ°¿¡ ÆùÆ®¸¦ ¼³Á¤ÇÕ´Ï´Ù.
 
-			    
-			    
 			    lbl.addActionListener(new ActionListener() {
 			        @Override
 			        public void actionPerformed(ActionEvent e) {
@@ -224,98 +203,106 @@ public class mainScreen extends JFrame implements ItemListener, ActionListener{
 			        }
 			    });
 
+			    // Ãâ·ÂÇÏ´Â ³¯Â¥¿¡ ´ëÇÑ ¿äÀÏ
+			    date.set(Calendar.DATE, day);
+			    int w = date.get(Calendar.DAY_OF_WEEK);
+			    if (w == 1) 
+			    	lbl.setForeground(Color.RED); // ÀÏ¿äÀÏÀº »¡°£»öÀ¸·Î Ç¥½Ã
+			        
+			    if (w == 7)
+			        lbl.setForeground(Color.BLUE); // Åä¿äÀÏÀº ÆÄ¶õ»öÀ¸·Î Ç¥½Ã
 
-
+			    dayPane.add(lbl);
 			}
+>>>>>>> Stashed changes
 	}
-	
-	//¿ùÈ­¼ö¸ñ±İÅäÀÏ ¼³Á¤
-	public void setCalendarTitle() { //¸Ş¼Òµå
-		for(int i =0; i <title.length; i++) { //¸¸µé¾îÁØ ¹è¿­ÀÇ ¼ö¸¸Å­ µ¹¸°´Ù.
-			JLabel lbl = new JLabel(title[i], JLabel.CENTER); //¸¸µé¾îÁØ ¹è¿­ÀÇ ¼ö¸¸Å­ label¿¡ ÁÖÀÔ½ÃÅ°°í °¡¿îµ¥·Î ¿À°ÔÇÑ´Ù.
-			lbl.setFont(fnt); //ÆùÆ®Àû¿ë
-			if(i ==0) lbl.setForeground(Color.red); //setForegroundÆùÆ®¼Ó¼ºÀ» º¯°æÇØÁÖ´Âµ¥ ¾²´Â°Í,
+	//ì›”í™”ìˆ˜ëª©ê¸ˆí† ì¼ ì„¤ì •
+	public void setCalendarTitle() { //ë©”ì†Œë“œ
+		for(int i =0; i <title.length; i++) { //ë§Œë“¤ì–´ì¤€ ë°°ì—´ì˜ ìˆ˜ë§Œí¼ ëŒë¦°ë‹¤.
+			JLabel lbl = new JLabel(title[i], JLabel.CENTER); //ë§Œë“¤ì–´ì¤€ ë°°ì—´ì˜ ìˆ˜ë§Œí¼ labelì— ì£¼ì…ì‹œí‚¤ê³  ê°€ìš´ë°ë¡œ ì˜¤ê²Œí•œë‹¤.
+			lbl.setFont(fnt); //í°íŠ¸ì ìš©
+			if(i ==0) lbl.setForeground(Color.red); //setForegroundí°íŠ¸ì†ì„±ì„ ë³€ê²½í•´ì£¼ëŠ”ë° ì“°ëŠ”ê²ƒ,
 			if(i ==6) lbl.setForeground(Color.blue);
-			titlePane.add(lbl); //Å¸ÀÌÆ²ÆĞ³Î¿¡ ¶óº§À» Ãß°¡½ÃÅ²´Ù.
+			titlePane.add(lbl); //íƒ€ì´í‹€íŒ¨ë„ì— ë¼ë²¨ì„ ì¶”ê°€ì‹œí‚¨ë‹¤.
 		}
 	}
-	//³âµµ¼¼ÆÃ
+	//ë…„ë„ì„¸íŒ…
 	public void setYear() {
-		for(int i= year-50; i<year+20; i++) { //ÇØ´ç±¸¹®À» ¹İº¹¹®À»µ¹·Á¼­
-			yearCombo.addItem(i); //yearCombo¹Ú½º¿¡ ´ã´Â´Ù.
+		for(int i= year-50; i<year+20; i++) { //í•´ë‹¹êµ¬ë¬¸ì„ ë°˜ë³µë¬¸ì„ëŒë ¤ì„œ
+			yearCombo.addItem(i); //yearComboë°•ìŠ¤ì— ë‹´ëŠ”ë‹¤.
 		}
-		yearCombo.setSelectedItem(year); //ÄŞº¸¹Ú½º¿¡ ´ãÁö¸¸ ÀÌº¥Æ®¿Í ¿¬µ¿½ÃÄÑÁÖ±âÀ§ÇØ ¼±¾ğ
+		yearCombo.setSelectedItem(year); //ì½¤ë³´ë°•ìŠ¤ì— ë‹´ì§€ë§Œ ì´ë²¤íŠ¸ì™€ ì—°ë™ì‹œì¼œì£¼ê¸°ìœ„í•´ ì„ ì–¸
 	}
-	//¿ù¼¼ÆÃ
+	//ì›”ì„¸íŒ…
 	public void setMonth() {
 		for(int i=1; i<=12; i++) {
 			monthCombo.addItem(i);
 		}
-		monthCombo.setSelectedItem(month); //À§¿Íµ¿
+		monthCombo.setSelectedItem(month); //ìœ„ì™€ë™
 	}
 	
-	//ÄŞº¸¹Ú½ºÅ¬¸¯ÀÌº¥Æ®
-	public void itemStateChanged(ItemEvent e) { //ÄŞº¸¹Ú½º¸¦ º¯°æÇÏ¿´À»¶§¿¡ ¼±ÅÃµÇ´Â ÀÌº¥Æ®ÀÌ´Ù.
-		year = (int)yearCombo.getSelectedItem(); //Çüº¯È¯ÇÑ°ÍÀ»º¼¼ö ÀÖÀ¸¸ç yearCombo¹Ù²î¾úÀ»¶§ yearComboÀÇ °ªÀ» getSelected °¡Á®¿Í¼­ Ã£´Â°ÍÀ» º¼¼ö ÀÖ´Ù.
+	//ì½¤ë³´ë°•ìŠ¤í´ë¦­ì´ë²¤íŠ¸
+	public void itemStateChanged(ItemEvent e) { //ì½¤ë³´ë°•ìŠ¤ë¥¼ ë³€ê²½í•˜ì˜€ì„ë•Œì— ì„ íƒë˜ëŠ” ì´ë²¤íŠ¸ì´ë‹¤.
+		year = (int)yearCombo.getSelectedItem(); //í˜•ë³€í™˜í•œê²ƒì„ë³¼ìˆ˜ ìˆìœ¼ë©° yearComboë°”ë€Œì—ˆì„ë•Œ yearComboì˜ ê°’ì„ getSelected ê°€ì ¸ì™€ì„œ ì°¾ëŠ”ê²ƒì„ ë³¼ìˆ˜ ìˆë‹¤.
 		month = (int)monthCombo.getSelectedItem();
 		
-		dayPane.setVisible(false); //ÆĞ³ÎÀ» ´İ´Â´Ù.
-		dayPane.removeAll(); //¿ø·¡ÀÖ´Â ³¯Â¥ Áö¿ì±â
-		setDay(); //³¯Â¥ Ã³¸® ÇÔ¼ö È£Ãâ
-		dayPane.setVisible(true); //ÆĞ³ÎÀ» º¼¼öÀÖ°Ô Ã³¸®ÇÑ´Ù.
+		dayPane.setVisible(false); //íŒ¨ë„ì„ ë‹«ëŠ”ë‹¤.
+		dayPane.removeAll(); //ì›ë˜ìˆëŠ” ë‚ ì§œ ì§€ìš°ê¸°
+		setDay(); //ë‚ ì§œ ì²˜ë¦¬ í•¨ìˆ˜ í˜¸ì¶œ
+		dayPane.setVisible(true); //íŒ¨ë„ì„ ë³¼ìˆ˜ìˆê²Œ ì²˜ë¦¬í•œë‹¤.
 		
-									//¿©±â¼­ ´İ°í Áö¿ü´Ù°¡ È£ÃâÇÏ°í, ´Ù½Ã º¸¿©ÁÖ´Â ÀÌÀ¯´Â  ¾È±×·¯¸é È­¸éÀÌ Áö¿öÁöÁö¾Ê±â ¶§¹®ÀÌ´Ù.
+									//ì—¬ê¸°ì„œ ë‹«ê³  ì§€ì› ë‹¤ê°€ í˜¸ì¶œí•˜ê³ , ë‹¤ì‹œ ë³´ì—¬ì£¼ëŠ” ì´ìœ ëŠ”  ì•ˆê·¸ëŸ¬ë©´ í™”ë©´ì´ ì§€ì›Œì§€ì§€ì•Šê¸° ë•Œë¬¸ì´ë‹¤.
 		
 	}
-	//¹öÆ°ÀÌº¥Æ® 
-	public void actionPerformed(ActionEvent ae) {  //¾×¼ÇÀÌº¥Æ®(¹öÆ°ÀÌº¥Æ®)
-		Object obj = ae.getSource(); //Obejct¿¡ ¾×¼ÇÀÌº¥Æ®ÀÇ ¼Ò½º¸¦ °¡Á®¿Â´Ù.
-		if(obj == prevBtn) {//ÀÌÀü¹öÆ°À» ´­·¶À»¶§
-			//ÀÌÀü¿ùÀ» ´­·¶À»¶§
-			prevMonth(); //ÀÌÀü¹öÆ°¸Ş¼ÒµåÈ£Ãâ
-			setDayReset(); //Day¸¦ ResetÇØÁÖ´Â ¸Ş¼Òµå È£Ãâ
-		}else if(obj == nextBtn) { //ÀÌÈÄ ¹öÆ°À» ´­·¶À»¶§
-			//´ÙÀ½¿ùÀ» ´­·¶À»‹š
-			nextMonth(); //À§¿Íµ¿
-			setDayReset(); //À§¿Íµ¿
+	//ë²„íŠ¼ì´ë²¤íŠ¸ 
+	public void actionPerformed(ActionEvent ae) {  //ì•¡ì…˜ì´ë²¤íŠ¸(ë²„íŠ¼ì´ë²¤íŠ¸)
+		Object obj = ae.getSource(); //Obejctì— ì•¡ì…˜ì´ë²¤íŠ¸ì˜ ì†ŒìŠ¤ë¥¼ ê°€ì ¸ì˜¨ë‹¤.
+		if(obj == prevBtn) {//ì´ì „ë²„íŠ¼ì„ ëˆŒë €ì„ë•Œ
+			//ì´ì „ì›”ì„ ëˆŒë €ì„ë•Œ
+			prevMonth(); //ì´ì „ë²„íŠ¼ë©”ì†Œë“œí˜¸ì¶œ
+			setDayReset(); //Dayë¥¼ Resetí•´ì£¼ëŠ” ë©”ì†Œë“œ í˜¸ì¶œ
+		}else if(obj == nextBtn) { //ì´í›„ ë²„íŠ¼ì„ ëˆŒë €ì„ë•Œ
+			//ë‹¤ìŒì›”ì„ ëˆŒë €ì„ë–„
+			nextMonth(); //ìœ„ì™€ë™
+			setDayReset(); //ìœ„ì™€ë™
 		}
 		
 	}
 	private void setDayReset() {
-		//³â¿ù ÀÌº¥Æ® µî·ÏÇØÁ¦
-		yearCombo.removeItemListener(this); //µî·ÏÀÌº¥Æ®¸¦ ÇØÁ¦½ÃÄÑÁÖ°í
+		//ë…„ì›” ì´ë²¤íŠ¸ ë“±ë¡í•´ì œ
+		yearCombo.removeItemListener(this); //ë“±ë¡ì´ë²¤íŠ¸ë¥¼ í•´ì œì‹œì¼œì£¼ê³ 
 		monthCombo.removeItemListener(this);
 		
-		yearCombo.setSelectedItem(year); //yearComboÀÇ year¿¡ ÇØ´çµÇ´Â °ªÀ» °¡Á®¿Â´Ù.
+		yearCombo.setSelectedItem(year); //yearComboì˜ yearì— í•´ë‹¹ë˜ëŠ” ê°’ì„ ê°€ì ¸ì˜¨ë‹¤.
 		monthCombo.setSelectedItem(month);
 		
-		dayPane.setVisible(false); //ÆĞ³ÎÀ» º¸¿©ÁÖ±â¸¦ ¼ûÅ²´Ù.
-		dayPane.removeAll(); //ÀüºÎÁö¿î´Ù.
-		setDay(); //ÇØ´ç¸Ş¼Òµå¸¦ È£ÃâÇÑ´Ù.
-		dayPane.setVisible(true); //´Ù½Ãº¸¿©ÁØ´Ù.
+		dayPane.setVisible(false); //íŒ¨ë„ì„ ë³´ì—¬ì£¼ê¸°ë¥¼ ìˆ¨í‚¨ë‹¤.
+		dayPane.removeAll(); //ì „ë¶€ì§€ìš´ë‹¤.
+		setDay(); //í•´ë‹¹ë©”ì†Œë“œë¥¼ í˜¸ì¶œí•œë‹¤.
+		dayPane.setVisible(true); //ë‹¤ì‹œë³´ì—¬ì¤€ë‹¤.
 		
-		yearCombo.addItemListener(this); //´Ù½Ã ÀÌº¥Æ®¸¦ µî·Ï½ÃÅ²´Ù.
-		monthCombo.addItemListener(this); //´Ù½Ã ÀÌº¥Æ® µî·Ï
+		yearCombo.addItemListener(this); //ë‹¤ì‹œ ì´ë²¤íŠ¸ë¥¼ ë“±ë¡ì‹œí‚¨ë‹¤.
+		monthCombo.addItemListener(this); //ë‹¤ì‹œ ì´ë²¤íŠ¸ ë“±ë¡
 		
 	}
-	public void prevMonth() { //¿ù
-		if(month==1) { //21.01¿ù ÀÏ¶§¿¡ 12¿ù·Î ¶³¾îÁö¸é¼­ year¸¦ Àü³âµµ·Î ¹Ù²Û´Ù.
+	public void prevMonth() { //ì›”
+		if(month==1) { //21.01ì›” ì¼ë•Œì— 12ì›”ë¡œ ë–¨ì–´ì§€ë©´ì„œ yearë¥¼ ì „ë…„ë„ë¡œ ë°”ê¾¼ë‹¤.
 			year--;
 			month=12;
-		}else { //±×¿ÜÀÇ °æ¿ì
+		}else { //ê·¸ì™¸ì˜ ê²½ìš°
 			month--; 
 		}
 	}
 	public void nextMonth() {
-		if(month==12){ //12¿ùÀÏ¶§¿¡´Â ³âµµ¸¦ Ãß°¡½ÃÅ°°í ¿ùÀ» 1·Î¹Ù²Û´Ù.
+		if(month==12){ //12ì›”ì¼ë•Œì—ëŠ” ë…„ë„ë¥¼ ì¶”ê°€ì‹œí‚¤ê³  ì›”ì„ 1ë¡œë°”ê¾¼ë‹¤.
 			year++; 
 			month=1;
-		}else{ //±×¿ÜÀÇ °æ¿ì
+		}else{ //ê·¸ì™¸ì˜ ê²½ìš°
 			month++;
 		}
 	}
 	
-	//½ÃÀÛ¸Ş¼Òµå
+	//ì‹œì‘ë©”ì†Œë“œ
 	public static void main(String[] args) {
 		new mainScreen();
 	}
