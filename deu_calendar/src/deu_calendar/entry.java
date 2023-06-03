@@ -3,6 +3,7 @@ package deu_calendar;
 import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.Font;
+import java.awt.Window;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.Enumeration;
@@ -49,9 +50,9 @@ public class entry extends JFrame {
 	public entry() {
 		setTitle("\uC77C\uC815 \uB4F1\uB85D");
 		setResizable(false);
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 724, 624);
-		setLocation(610,200);
+		setLocationRelativeTo(null); // 화면 중앙 정렬
 		setVisible(true);
 		contentPane = new JPanel();
 		contentPane.setBackground(new Color(255, 255, 255));
@@ -160,7 +161,13 @@ public class entry extends JFrame {
 		            }
 		        }
 				reg.regist(); // DB에 입력 값 삽입
-				dispose();
+
+				Window[] windows = Window.getWindows();
+		        for (Window window : windows) {
+		            window.dispose(); // 열려있는 모든 창 종료
+		        }
+		        mainScreen NewmainScreen = new mainScreen();
+		        NewmainScreen.setVisible(true); // 캘린더 화면 출력
 			} // 등록 버튼 클릭
 		});
 		btnNewButton.setBounds(217, 528, 97, 23);
@@ -172,6 +179,7 @@ public class entry extends JFrame {
 			public void mouseClicked(MouseEvent e) {
 				
 				dispose();
+				
 				
 			} // 취소 버튼 클릭
 		});

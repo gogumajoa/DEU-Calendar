@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
+import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
@@ -23,6 +24,8 @@ import javax.swing.SwingConstants;
 
 import java.awt.SystemColor;
 import javax.swing.border.LineBorder;
+import javax.swing.JList;
+import javax.swing.AbstractListModel;
 
 public class mainScreen extends JFrame implements ItemListener, ActionListener{
 	Font fnt = new Font("굴림체", Font.BOLD, 15);
@@ -56,8 +59,6 @@ public class mainScreen extends JFrame implements ItemListener, ActionListener{
 	int month;
 	private final JLabel lblNewLabel = new JLabel("\uB3D9\uC758 \uCE98\uB9B0\uB354");
 	private final JLabel lblNewLabel_1 = new JLabel("\uC77C\uC815 \uB9AC\uC2A4\uD2B8");
-	private final JTextArea txtrTestTest = new JTextArea();
-	
 	
 	
 	public mainScreen() {
@@ -68,7 +69,7 @@ public class mainScreen extends JFrame implements ItemListener, ActionListener{
 		year = date.get(Calendar.YEAR); // 캘린더에서 년을 받아와서 미리생성해놓은 year에 주입한다.
 		month = date.get(Calendar.MONTH)+1; //월을 받아와서 month에 대입한다. +1을 하는 이유는 0~11이라
 		getContentPane().setLayout(null);
-		selectPane.setBounds(202, 46, 729, 37);
+		selectPane.setBounds(701, 34, 387, 37);
 		
 		//상단
 		selectPane.setBackground(Color.WHITE); //백그라운드의 배경을 주입한다.
@@ -88,7 +89,7 @@ public class mainScreen extends JFrame implements ItemListener, ActionListener{
 		
 		//title호출
 		setCalendarTitle();		//일월화수목금토를 만들어놓은 메소드 setCalendarTitle을 호출한다.
-		centerPane.setBounds(202, 89, 729, 380);
+		centerPane.setBounds(202, 89, 886, 539);
 		titlePane.setBorder(new LineBorder(new Color(0, 0, 0)));
 		titlePane.setBackground(new Color(220, 220, 220));
 		centerPane.add(BorderLayout.NORTH, titlePane);	//센터패널의 위쪽에 title을 넣는다(일월화수목금토)
@@ -98,22 +99,30 @@ public class mainScreen extends JFrame implements ItemListener, ActionListener{
 		
 		//날짜만들기
 		centerPane.add(dayPane);
-		lblNewLabel.setFont(new Font("맑은 고딕", Font.BOLD, 33));
-		lblNewLabel.setBounds(407, 5, 226, 37);
+		lblNewLabel.setFont(new Font("맑은 고딕 Semilight", Font.BOLD, 33));
+		lblNewLabel.setBounds(464, 22, 226, 37);
 		
 		getContentPane().add(lblNewLabel);
 		lblNewLabel_1.setFont(new Font("맑은 고딕", Font.BOLD, 17));
 		lblNewLabel_1.setBounds(61, 46, 91, 37);
 		
 		getContentPane().add(lblNewLabel_1);
-		txtrTestTest.setBorder(new LineBorder(new Color(0, 0, 0)));
-		txtrTestTest.setBackground(new Color(255, 255, 255));
-		txtrTestTest.setEditable(false);
-		txtrTestTest.setRows(10);
-		txtrTestTest.setText("TEST1\r\nTEST2");
-		txtrTestTest.setBounds(12, 89, 178, 380);
 		
-		getContentPane().add(txtrTestTest);
+		JList list = new JList();
+		// 임시 데이터 저장하기 위한 코드 (수정해서 사용해야 함)
+		list.setModel(new AbstractListModel() {
+			String[] values = new String[] {"\uC77C\uC815 1", "\uC77C\uC815 2", "\uC77C\uC815 3", "\uC77C\uC815 4"};
+			public int getSize() {
+				return values.length;
+			}
+			public Object getElementAt(int index) {
+				return values[index];
+			}
+		});
+		list.setBounds(27, 89, 150, 539);
+		list.setBorder(BorderFactory.createLineBorder(Color.BLACK)); // 테두리 선
+		list.setFixedCellHeight(40);
+		getContentPane().add(list);
 		setDay();	//setDay()메소드를 호출한다.
 		
 		
@@ -125,10 +134,10 @@ public class mainScreen extends JFrame implements ItemListener, ActionListener{
 		monthCombo.addItemListener(this);
 		
 		//JFrame의 설정들
-		setLocation(450,200);
-		setSize(959, 518);
+		setSize(1130, 691);
+		setLocationRelativeTo(null); // 화면 중앙 정렬
 		setVisible(true);
-		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+		//setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 	}
 	//날짜셋팅
 	public void setDay() {
@@ -145,34 +154,23 @@ public class mainScreen extends JFrame implements ItemListener, ActionListener{
 			dayPane.add(lbl);
 		}
 		//날짜추가
-		for(int day=1; day<=lastDay; day++) {
-//			JButton lbl = new JButton(String.valueOf(day)); //라벨선언해주는데 String.value 는 형변환이다. JLabel을 가운데에 입력하게둔다.
-//			lbl.setHorizontalAlignment(SwingConstants.TOP);		//// 가운데 정렬
-//			lbl.setEditable(false);
-/*			lbl.setBackground(Color.WHITE);
-			lbl.setFont(fnt); //라벨에 폰트를 주입한다.
-			
-			lbl.addActionListener(new ActionListener() {
-				
-				@Override
-				public void actionPerformed(ActionEvent e) {
-					// TODO Auto-generated method stub
-					new detail();
-				}
-			});
-			
-			//출력하는 날짜에 대한 요일
-			date.set(Calendar.DATE, day); // 19 ->1
-			int w = date.get(Calendar.DAY_OF_WEEK); //요일
-			if(w ==1) lbl.setForeground(Color.red); //일월화수목금토 (1~7) 1은 일요일이므로 일요일에 red색깔
-			if(w ==7) lbl.setForeground(Color.blue); //7이므로 blue색깔
-			dayPane.add(lbl);
-		}
-	}*/
-			  JButton lbl = new JButton();
+		for(int day=1; day<=lastDay; day++) {			
+			  	JButton lbl = new JButton();
+			    
 			    lbl.setLayout(new BorderLayout()); // 버튼의 레이아웃을 BorderLayout으로 설정합니다.
 
 			    JLabel dayLabel = new JLabel(String.valueOf(day));
+			    
+			    // 출력하는 날짜에 대한 요일
+			    date.set(Calendar.DATE, day);
+			    int w = date.get(Calendar.DAY_OF_WEEK);
+			    if (w == 1)
+			    	dayLabel.setForeground(Color.RED); // 일요일은 빨간색으로 표시
+			    if (w == 7)
+			    	dayLabel.setForeground(Color.BLUE); // 토요일은 파란색으로 표시
+
+			    dayPane.add(lbl);
+			    
 			    dayLabel.setHorizontalAlignment(SwingConstants.RIGHT); // 날짜를 오른쪽 정렬합니다.
 			    lbl.add(dayLabel, BorderLayout.NORTH); // 날짜를 버튼의 상단에 추가합니다.
 
@@ -201,15 +199,18 @@ public class mainScreen extends JFrame implements ItemListener, ActionListener{
 			    Font font = scheduleLabel.getFont();
 			    Font smallerFont = font.deriveFont(font.getSize() - 2f); // 폰트 크기를 2포인트 작게 설정
 			    scheduleLabel.setFont(smallerFont);
-
+			    scheduleLabel.setForeground(Color.BLUE);	// 일정내용 글씨 색설정
 			    lbl.add(scheduleLabel, BorderLayout.CENTER); // 일정을 버튼의 중앙에 추가합니다.
 
-			    lbl.setBackground(Color.WHITE);
+			    
+			    lbl.setBackground(Color.white);
 			    lbl.setFont(fnt); // 버튼에 폰트를 설정합니다.
 			    
 			 // ActionListener 내부에서 day 변수를 사용하기 위해 클래스 멤버 변수로 변경
 			    final int selectedDay = day;
 
+			    
+			    
 			    lbl.addActionListener(new ActionListener() {
 			        @Override
 			        public void actionPerformed(ActionEvent e) {
@@ -218,15 +219,8 @@ public class mainScreen extends JFrame implements ItemListener, ActionListener{
 			        }
 			    });
 
-			    // 출력하는 날짜에 대한 요일
-			    date.set(Calendar.DATE, day);
-			    int w = date.get(Calendar.DAY_OF_WEEK);
-			    if (w == 1)
-			        lbl.setForeground(Color.RED); // 일요일은 빨간색으로 표시
-			    if (w == 7)
-			        lbl.setForeground(Color.BLUE); // 토요일은 파란색으로 표시
 
-			    dayPane.add(lbl);
+
 			}
 	}
 	
