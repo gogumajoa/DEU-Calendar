@@ -168,10 +168,23 @@ public class mainScreen extends JFrame implements ItemListener, ActionListener{
 			dayPane.add(lbl);
 		}
 	}*/
-			  JButton lbl = new JButton();
+			
+			  	JButton lbl = new JButton();
+			    
 			    lbl.setLayout(new BorderLayout()); // 버튼의 레이아웃을 BorderLayout으로 설정합니다.
 
 			    JLabel dayLabel = new JLabel(String.valueOf(day));
+			    
+			    // 출력하는 날짜에 대한 요일
+			    date.set(Calendar.DATE, day);
+			    int w = date.get(Calendar.DAY_OF_WEEK);
+			    if (w == 1)
+			    	dayLabel.setForeground(Color.RED); // 일요일은 빨간색으로 표시
+			    if (w == 7)
+			    	dayLabel.setForeground(Color.BLUE); // 토요일은 파란색으로 표시
+
+			    dayPane.add(lbl);
+			    
 			    dayLabel.setHorizontalAlignment(SwingConstants.RIGHT); // 날짜를 오른쪽 정렬합니다.
 			    lbl.add(dayLabel, BorderLayout.NORTH); // 날짜를 버튼의 상단에 추가합니다.
 
@@ -195,12 +208,15 @@ public class mainScreen extends JFrame implements ItemListener, ActionListener{
 			    Font font = scheduleLabel.getFont();
 			    Font smallerFont = font.deriveFont(font.getSize() - 2f); // 폰트 크기를 2포인트 작게 설정
 			    scheduleLabel.setFont(smallerFont);
-
+			    scheduleLabel.setForeground(Color.BLUE);	// 일정내용 글씨 색설정
 			    lbl.add(scheduleLabel, BorderLayout.CENTER); // 일정을 버튼의 중앙에 추가합니다.
 
-			    lbl.setBackground(Color.WHITE);
+			    
+			    lbl.setBackground(Color.white);
 			    lbl.setFont(fnt); // 버튼에 폰트를 설정합니다.
 
+			    
+			    
 			    lbl.addActionListener(new ActionListener() {
 			        @Override
 			        public void actionPerformed(ActionEvent e) {
@@ -208,15 +224,8 @@ public class mainScreen extends JFrame implements ItemListener, ActionListener{
 			        }
 			    });
 
-			    // 출력하는 날짜에 대한 요일
-			    date.set(Calendar.DATE, day);
-			    int w = date.get(Calendar.DAY_OF_WEEK);
-			    if (w == 1)
-			        lbl.setForeground(Color.RED); // 일요일은 빨간색으로 표시
-			    if (w == 7)
-			        lbl.setForeground(Color.BLUE); // 토요일은 파란색으로 표시
 
-			    dayPane.add(lbl);
+
 			}
 	}
 	
