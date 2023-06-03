@@ -1,28 +1,31 @@
 package deu_calendar;
 
+import java.awt.Color;
 import java.awt.EventQueue;
-
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-import javax.swing.JLabel;
 import java.awt.Font;
-import javax.swing.JTextField;
-import javax.swing.JTextArea;
-import javax.swing.JRadioButton;
-import javax.swing.AbstractButton;
-import javax.swing.ButtonGroup;
-import javax.swing.JButton;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.Enumeration;
-import java.awt.Color;
+
+import javax.swing.AbstractButton;
+import javax.swing.ButtonGroup;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JRadioButton;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
+import javax.swing.border.EmptyBorder;
+import javax.swing.text.AbstractDocument;
+import javax.swing.text.DocumentFilter;
 
 public class entry extends JFrame {
 
 	private JPanel contentPane;
 	public static JTextField textField;
 	public static JTextArea textArea;
+	public static JRadioButton Repetiton;
 
 	/**
 	 * Launch the application.
@@ -44,8 +47,11 @@ public class entry extends JFrame {
 	 * Create the frame.
 	 */
 	public entry() {
+		setTitle("\uC77C\uC815 \uB4F1\uB85D");
+		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 724, 624);
+		setLocation(610,200);
 		setVisible(true);
 		contentPane = new JPanel();
 		contentPane.setBackground(new Color(255, 255, 255));
@@ -64,7 +70,8 @@ public class entry extends JFrame {
 		contentPane.add(lblNewLabel_1);
 		
 		textField = new JTextField();
-		textField.setBounds(283, 97, 275, 37);
+		textField.setFont(new Font("맑은 고딕", Font.PLAIN, 16));
+		textField.setBounds(219, 97, 330, 37);
 		contentPane.add(textField);
 		textField.setColumns(10);
 		
@@ -73,8 +80,27 @@ public class entry extends JFrame {
 		contentPane.add(lblNewLabel_1_1);
 		
 		textArea = new JTextArea();
+		textArea.setFont(new Font("맑은 고딕", Font.PLAIN, 16));
+		textArea.setLineWrap(true);
 		textArea.setBounds(138, 213, 411, 111);
 		contentPane.add(textArea);
+		 
+		// 여기부터 추가
+		int maxLength = 50; // 최대 글자 수
+        AbstractDocument doc = (AbstractDocument) textArea.getDocument();
+        doc.setDocumentFilter(new DocumentFilter() {
+            @Override
+            public void replace(FilterBypass fb, int offset, int length, String text, javax.swing.text.AttributeSet attrs) throws javax.swing.text.BadLocationException {
+                int currentLength = fb.getDocument().getLength();
+                int overLimit = (currentLength + text.length()) - maxLength - length;
+                if (overLimit > 0) {
+                    text = text.substring(0, text.length() - overLimit);
+                }
+                if (text.length() > 0) {
+                    super.replace(fb, offset, length, text, attrs);
+                }
+            }
+        }); // 여기까지
 		
 		JRadioButton rdbtnNewRadioButton = new JRadioButton("\uBC18\uBCF5 \uC5C6\uC74C");
 		rdbtnNewRadioButton.setBackground(new Color(255, 255, 255));
@@ -119,12 +145,10 @@ public class entry extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				// 일정 제목 값 받아오기
-				reg.birngTitle(textField.getText());
-				System.out.println(reg.birngTitle(textField.getText()));
+				reg.birngTitle();
 				
 				// 일정 메모 값 받아오기
-				reg.bringMemo(textArea.getText());
-				System.out.println(reg.bringMemo(textArea.getText()));
+				reg.bringMemo();
 				
 				// 선택된 라디오버튼 값 가져오기
 				JRadioButton selectBtn = null;
@@ -135,8 +159,7 @@ public class entry extends JFrame {
 		                break;
 		            }
 		        }
-				System.out.println(selectBtn.getActionCommand());
-				
+				reg.regist(); // DB에 입력 값 삽입
 				dispose();
 			} // 등록 버튼 클릭
 		});

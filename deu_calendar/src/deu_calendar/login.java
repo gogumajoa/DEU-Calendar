@@ -28,6 +28,7 @@ public class login extends JFrame {
 			public void run() {
 				try {
 					login frame = new login();
+					frame.setLocation(500,200);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -40,10 +41,11 @@ public class login extends JFrame {
 	 * Create the frame.
 	 */
 	public login() {
+		setResizable(false);
 		setTitle("\uB85C\uADF8\uC778");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 780, 500);
-		contentPane = new JPanel();
+		contentPane = new JPanel(); 
 		contentPane.setBackground(new Color(255, 255, 255));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
@@ -79,7 +81,7 @@ public class login extends JFrame {
 		contentPane.add(passwordField);
 		
 		JLabel lblNewLabel_2 = new JLabel("New label");
-		lblNewLabel_2.setIcon(new ImageIcon("C:\\Java\\workspace\\deu_calendar\\src\\image\\deu.PNG"));
+		lblNewLabel_2.setIcon(new ImageIcon(login.class.getResource("/image/deu.PNG")));
 		lblNewLabel_2.setBounds(246, 40, 259, 225);
 		contentPane.add(lblNewLabel_2);
 	}
