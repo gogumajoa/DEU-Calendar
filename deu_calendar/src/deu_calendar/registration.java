@@ -35,14 +35,14 @@ public class registration {
 		return Repetiton;
 	}
 	
-	// 날짜 값 받아오는 메소드
-	public String bringDayValue() {
-		
-		return dayValue;
-	}
+	/*
+	 * // 날짜 값 받아오는 메소드 public String bringDayValue(String fullday) {
+	 * System.out.println(fullday); return fullday; }
+	 */
 	
 	// 일정 등록 기능 메소드
-	public void regist() {
+	public void regist(String fullday) {
+
 		Connection con = null;
 		String url = "jdbc:oracle:thin:@dict.asuscomm.com:3100:system";
 	    String id = "c##java";
@@ -61,7 +61,7 @@ public class registration {
                 String insertPlantSql = "INSERT INTO PLAN (STUDENT_ID, REGIST_DATE, PLAN_TITLE, MEMO, REPEATVALUE) VALUES (?, ?, ?, ?, ?)";
                 PreparedStatement insertPlanStatement = con.prepareStatement(insertPlantSql);
                 insertPlanStatement.setInt(1, 20215030); //임의로 db 집어넣은 값 학번
-                insertPlanStatement.setInt(2, 202321); //날짜 임의 값
+                insertPlanStatement.setString(2, fullday); //날짜 임의 값
                 insertPlanStatement.setString(3, birngTitle()); //일정 명
                 insertPlanStatement.setString(4, bringMemo()); //메모
                 insertPlanStatement.setString(5, bringRepeat()); //반복값

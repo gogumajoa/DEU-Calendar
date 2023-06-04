@@ -32,10 +32,11 @@ public class entry extends JFrame {
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
+		String fullday="0";
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					entry frame = new entry();
+					entry frame = new entry(fullday);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -44,10 +45,8 @@ public class entry extends JFrame {
 		});
 	}
 
-	/**
-	 * Create the frame.
-	 */
-	public entry() {
+	public entry(String fullday) {
+		//System.out.println(fullday);
 		setTitle("\uC77C\uC815 \uB4F1\uB85D");
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -151,6 +150,10 @@ public class entry extends JFrame {
 				// 일정 메모 값 받아오기
 				reg.bringMemo();
 				
+				/*
+				 * // 날짜 값 reg.bringDayValue(fullday);
+				 */
+				
 				// 선택된 라디오버튼 값 가져오기
 				Repetiton = null;
 		        for (Enumeration<AbstractButton> buttons = BtnGroup.getElements(); buttons.hasMoreElements();) {
@@ -160,7 +163,7 @@ public class entry extends JFrame {
 		                break;
 		            }
 		        }
-				reg.regist(); // DB에 입력 값 삽입
+				reg.regist(fullday); // DB에 입력 값 삽입
 
 				Window[] windows = Window.getWindows();
 		        for (Window window : windows) {
