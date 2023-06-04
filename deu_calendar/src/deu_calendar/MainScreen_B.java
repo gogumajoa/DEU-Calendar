@@ -208,6 +208,7 @@ public class MainScreen_B extends JFrame implements ItemListener, ActionListener
 			    
 			 // ActionListener 내부에서 day 변수를 사용하기 위해 클래스 멤버 변수로 변경
 			    final int selectedDay = day;
+			    final String fullday = String.valueOf(year) + String.valueOf(month) + String.valueOf(day);
 
 			    
 			    
@@ -215,7 +216,7 @@ public class MainScreen_B extends JFrame implements ItemListener, ActionListener
 			        @Override
 			        public void actionPerformed(ActionEvent e) {
 			        	 String select_day= (String.valueOf(selectedDay));
-			        	 new Detail_B(sendlist, select_day);
+			        	 new Detail_B(sendlist, select_day,fullday);
 			        }
 			    });
 

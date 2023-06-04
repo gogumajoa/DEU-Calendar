@@ -35,11 +35,12 @@ public class Detail_B extends JFrame {
     public static void main(String[] args) {
         final ArrayList<ArrayList<String>> data = new ArrayList<>();
         String select_day="0";
+        String fullday="0";
 
         EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {
-                    Detail_B frame = new Detail_B(data, select_day);
+                    Detail_B frame = new Detail_B(data, select_day, fullday);
                     frame.setVisible(true);
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -48,7 +49,7 @@ public class Detail_B extends JFrame {
         });
     }
 
-    public Detail_B(ArrayList<ArrayList<String>> data, String select_day) {
+    public Detail_B(ArrayList<ArrayList<String>> data, String select_day, String fullday) {
         this.data = data;
         this.select_day = select_day;
         System.out.println(data);
@@ -73,7 +74,7 @@ public class Detail_B extends JFrame {
         btnNewButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {    
-                new Regis_B();
+                new Regis_B(fullday);
             }
         });
         btnNewButton.setBounds(513, 60, 87, 28);
