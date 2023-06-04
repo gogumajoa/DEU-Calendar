@@ -7,7 +7,7 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 
-public class Regis_C {
+public class registration {
 	
 	private String planName; // 일정 제목
 	private String memoTextArea; // 일정 메모
@@ -16,21 +16,21 @@ public class Regis_C {
 	
 	// 일정 제목 가져오는 메소드
 	public String birngTitle() { 
-		planName = Regis_B.textField.getText();
+		planName = entry.textField.getText();
 		
 		return planName;
 	}
 	
 	// 일정 메모 가져오는 메소드
 	public String bringMemo() {
-		memoTextArea = Regis_B.textArea.getText();
+		memoTextArea = entry.textArea.getText();
 		
 		return memoTextArea;	
 	}
 	
 	// 반복 값 가져오는 메소드
 	public String bringRepeat() {
-		Repetiton = Regis_B.Repetiton.getText();
+		Repetiton = entry.Repetiton.getText();
 		
 		return Repetiton;
 	}

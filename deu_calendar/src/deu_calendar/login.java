@@ -14,7 +14,7 @@ import javax.swing.JPasswordField;
 import javax.swing.ImageIcon;
 import java.awt.Color;
 
-public class Login_B extends JFrame {
+public class login extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField textField;
@@ -27,7 +27,7 @@ public class Login_B extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Login_B frame = new Login_B();
+					login frame = new login();
 					frame.setLocation(500,200);
 					frame.setVisible(true);
 				} catch (Exception e) {
@@ -40,7 +40,7 @@ public class Login_B extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public Login_B() {
+	public login() {
 		setResizable(false);
 		setTitle("\uB85C\uADF8\uC778");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -70,7 +70,7 @@ public class Login_B extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				dispose();
-				new MainScreen_B();
+				new mainScreen();
 			}
 		});
 		btnNewButton.setBounds(481, 371, 97, 23);
@@ -81,7 +81,7 @@ public class Login_B extends JFrame {
 		contentPane.add(passwordField);
 		
 		JLabel lblNewLabel_2 = new JLabel("New label");
-		lblNewLabel_2.setIcon(new ImageIcon(Login_B.class.getResource("/image/deu.PNG")));
+		lblNewLabel_2.setIcon(new ImageIcon(login.class.getResource("/image/deu.PNG")));
 		lblNewLabel_2.setBounds(246, 40, 259, 225);
 		contentPane.add(lblNewLabel_2);
 	}

@@ -9,7 +9,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement; 
 
-public class Schedule_C {
+public class mainScreen_Control {
 	public ArrayList<ArrayList<ArrayList<String>>> ConnectDB(int studentID) {
 	    Connection con = null;
 	    String url = "jdbc:oracle:thin:@dict.asuscomm.com:3100:system";

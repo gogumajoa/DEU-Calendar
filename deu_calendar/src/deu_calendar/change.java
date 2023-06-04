@@ -18,7 +18,7 @@ import javax.swing.JButton;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-public class Modify_B extends JFrame {
+public class change extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField textField;
@@ -30,7 +30,7 @@ public class Modify_B extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Modify_B frame = new Modify_B();
+					change frame = new change();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -42,7 +42,7 @@ public class Modify_B extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public Modify_B() {
+	public change() {
 		setResizable(false);
 		setTitle("\uC77C\uC815 \uC218\uC815");
 		setSize(724,624);
