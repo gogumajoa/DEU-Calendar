@@ -12,7 +12,7 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-public class crawling_C {
+public class Crawling_C {
 	public static void main(String[] args) {
 		try {
 			// 크롤링 할 Door 사이트 주소

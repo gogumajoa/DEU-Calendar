@@ -25,11 +25,10 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellEditor;
 import javax.swing.table.TableCellRenderer;
 
-public class detail extends JFrame {
+public class Detail_B extends JFrame {
     private ArrayList<ArrayList<String>> data;
     private JPanel contentPane;
     private String select_day;
-    private String fullday;
     private JTable table;
     private DefaultTableModel model; //jtable
 
@@ -41,7 +40,7 @@ public class detail extends JFrame {
         EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {
-                    detail frame = new detail(data, select_day, fullday);
+                    Detail_B frame = new Detail_B(data, select_day, fullday);
                     frame.setVisible(true);
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -50,7 +49,7 @@ public class detail extends JFrame {
         });
     }
 
-    public detail(ArrayList<ArrayList<String>> data, String select_day, String fullday) {
+    public Detail_B(ArrayList<ArrayList<String>> data, String select_day, String fullday) {
         this.data = data;
         this.select_day = select_day;
         System.out.println(data);
@@ -75,7 +74,7 @@ public class detail extends JFrame {
         btnNewButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {    
-                new entry(fullday);
+                new Regis_B(fullday);
             }
         });
         btnNewButton.setBounds(513, 60, 87, 28);
@@ -135,7 +134,7 @@ public class detail extends JFrame {
                     // 클릭 이벤트 처리 로직을 작성하세요
                     // 수정 버튼이 클릭되었을 때 수행할 동작을 여기에 추가합니다
                     // 예시: 새로운 change 인스턴스를 생성하여 변경 작업을 수행
-                    new change();
+                    new Modify_B();
                 }
             });
         }

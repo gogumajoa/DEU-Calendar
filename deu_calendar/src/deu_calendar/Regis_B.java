@@ -21,7 +21,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.text.AbstractDocument;
 import javax.swing.text.DocumentFilter;
 
-public class entry extends JFrame {
+public class Regis_B extends JFrame {
 
 	private JPanel contentPane;
 	public static JTextField textField;
@@ -36,7 +36,7 @@ public class entry extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					entry frame = new entry(fullday);
+					Regis_B frame = new Regis_B(fullday);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -45,8 +45,10 @@ public class entry extends JFrame {
 		});
 	}
 
-	public entry(String fullday) {
-		//System.out.println(fullday);
+	/**
+	 * Create the frame.
+	 */
+	public Regis_B(String fullday) {
 		setTitle("\uC77C\uC815 \uB4F1\uB85D");
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -138,7 +140,7 @@ public class entry extends JFrame {
 		BtnGroup.add(rdbtnNewRadioButton_4);
 		
 		// registration 클래스의 인스턴스 생성
-		registration reg = new registration();
+		Regis_C reg = new Regis_C();
 		
 		JButton btnNewButton = new JButton("entry");
 		btnNewButton.addMouseListener(new MouseAdapter() {
@@ -150,10 +152,6 @@ public class entry extends JFrame {
 				// 일정 메모 값 받아오기
 				reg.bringMemo();
 				
-				/*
-				 * // 날짜 값 reg.bringDayValue(fullday);
-				 */
-				
 				// 선택된 라디오버튼 값 가져오기
 				Repetiton = null;
 		        for (Enumeration<AbstractButton> buttons = BtnGroup.getElements(); buttons.hasMoreElements();) {
@@ -163,13 +161,13 @@ public class entry extends JFrame {
 		                break;
 		            }
 		        }
-				reg.regist(fullday); // DB에 입력 값 삽입
+		        reg.regist(fullday); // DB에 입력 값 삽입
 
 				Window[] windows = Window.getWindows();
 		        for (Window window : windows) {
 		            window.dispose(); // 열려있는 모든 창 종료
 		        }
-		        mainScreen NewmainScreen = new mainScreen();
+		        MainScreen_B NewmainScreen = new MainScreen_B();
 		        NewmainScreen.setVisible(true); // 캘린더 화면 출력
 			} // 등록 버튼 클릭
 		});

@@ -7,42 +7,37 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 
-public class registration {
+public class Regis_C {
 	
 	private String planName; // 일정 제목
 	private String memoTextArea; // 일정 메모
 	private String Repetiton; // 반복 값
-	private String dayValue; // 날짜 값
+	
 	
 	// 일정 제목 가져오는 메소드
 	public String birngTitle() { 
-		planName = entry.textField.getText();
+		planName = Regis_B.textField.getText();
 		
 		return planName;
 	}
 	
 	// 일정 메모 가져오는 메소드
 	public String bringMemo() {
-		memoTextArea = entry.textArea.getText();
+		memoTextArea = Regis_B.textArea.getText();
 		
 		return memoTextArea;	
 	}
 	
 	// 반복 값 가져오는 메소드
 	public String bringRepeat() {
-		Repetiton = entry.Repetiton.getText();
+		Repetiton = Regis_B.Repetiton.getText();
 		
 		return Repetiton;
 	}
 	
-	/*
-	 * // 날짜 값 받아오는 메소드 public String bringDayValue(String fullday) {
-	 * System.out.println(fullday); return fullday; }
-	 */
 	
 	// 일정 등록 기능 메소드
 	public void regist(String fullday) {
-
 		Connection con = null;
 		String url = "jdbc:oracle:thin:@dict.asuscomm.com:3100:system";
 	    String id = "c##java";
