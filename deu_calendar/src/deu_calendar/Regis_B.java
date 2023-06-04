@@ -63,7 +63,7 @@ public class Regis_B extends JFrame {
 		contentPane.setLayout(null);
 		
 		JLabel lblNewLabel = new JLabel("\uC77C\uC815 \uB4F1\uB85D");
-		lblNewLabel.setFont(new Font("굴림", Font.PLAIN, 20));
+		lblNewLabel.setFont(new Font("굴림", Font.BOLD, 20));
 		lblNewLabel.setBounds(303, 20, 95, 34);
 		contentPane.add(lblNewLabel);
 		
@@ -142,7 +142,7 @@ public class Regis_B extends JFrame {
 		// registration 클래스의 인스턴스 생성
 		Regis_C reg = new Regis_C();
 		
-		JButton btnNewButton = new JButton("entry");
+		JButton btnNewButton = new JButton("\uB4F1\uB85D");
 		btnNewButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -174,7 +174,7 @@ public class Regis_B extends JFrame {
 		btnNewButton.setBounds(217, 528, 97, 23);
 		contentPane.add(btnNewButton);
 		
-		JButton btnNewButton_1 = new JButton("cancel");
+		JButton btnNewButton_1 = new JButton("\uCDE8\uC18C");
 		btnNewButton_1.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {

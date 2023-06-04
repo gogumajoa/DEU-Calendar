@@ -43,12 +43,12 @@ public class Modify_B extends JFrame {
 	 * Create the frame.
 	 */
 	public Modify_B() {
+		setAlwaysOnTop(true);
 		setResizable(false);
 		setTitle("\uC77C\uC815 \uC218\uC815");
 		setSize(724,624);
 		setLocationRelativeTo(null); // 화면 중앙 정렬
 		setVisible(true);
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		contentPane = new JPanel();
 		contentPane.setBackground(new Color(255, 255, 255));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -62,22 +62,22 @@ public class Modify_B extends JFrame {
 		textArea.setBounds(138, 213, 411, 111);
 		contentPane.add(textArea);
 		
-		// 여기부터 추가
-				int maxLength = 50; // 최대 글자 수
-		        AbstractDocument doc = (AbstractDocument) textArea.getDocument();
-		        doc.setDocumentFilter(new DocumentFilter() {
-		            @Override
-		            public void replace(FilterBypass fb, int offset, int length, String text, javax.swing.text.AttributeSet attrs) throws javax.swing.text.BadLocationException {
-		                int currentLength = fb.getDocument().getLength();
-		                int overLimit = (currentLength + text.length()) - maxLength - length;
-		                if (overLimit > 0) {
-		                    text = text.substring(0, text.length() - overLimit);
-		                }
-		                if (text.length() > 0) {
-		                    super.replace(fb, offset, length, text, attrs);
-		                }
-		            }
-		        }); // 여기까지
+		
+		int maxLength = 50; // 최대 글자 수
+        AbstractDocument doc = (AbstractDocument) textArea.getDocument();
+        doc.setDocumentFilter(new DocumentFilter() {
+            @Override
+            public void replace(FilterBypass fb, int offset, int length, String text, javax.swing.text.AttributeSet attrs) throws javax.swing.text.BadLocationException {
+                int currentLength = fb.getDocument().getLength();
+                int overLimit = (currentLength + text.length()) - maxLength - length;
+                if (overLimit > 0) {
+                    text = text.substring(0, text.length() - overLimit);
+                }
+                if (text.length() > 0) {
+                    super.replace(fb, offset, length, text, attrs);
+                }
+            }
+        }); 
 		
 		JLabel lblNewLabel = new JLabel("\uC77C\uC815 \uC218\uC815");
 		lblNewLabel.setFont(new Font("굴림", Font.PLAIN, 20));
