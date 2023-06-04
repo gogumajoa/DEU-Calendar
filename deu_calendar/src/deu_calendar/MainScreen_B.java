@@ -27,11 +27,11 @@ import javax.swing.border.LineBorder;
 import javax.swing.JList;
 import javax.swing.AbstractListModel;
 
-public class mainScreen extends JFrame implements ItemListener, ActionListener{
+public class MainScreen_B extends JFrame implements ItemListener, ActionListener{
 	Font fnt = new Font("굴림체", Font.BOLD, 15);
 	Font fnt2 = new Font("굴림체", Font.BOLD, 12);
 	
-	mainScreen_Control controller = new mainScreen_Control();
+	Schedule_C controller = new Schedule_C();
 	int studentID=20215030;
 	ArrayList<ArrayList<ArrayList<String>>> result = controller.ConnectDB(studentID);
 	
@@ -61,7 +61,7 @@ public class mainScreen extends JFrame implements ItemListener, ActionListener{
 	private final JLabel lblNewLabel_1 = new JLabel("\uC77C\uC815 \uB9AC\uC2A4\uD2B8");
 	
 	
-	public mainScreen() {
+	public MainScreen_B() {
 		super("동의 캘린더");
 		setResizable(false);
 		getContentPane().setBackground(Color.WHITE);
@@ -215,7 +215,7 @@ public class mainScreen extends JFrame implements ItemListener, ActionListener{
 			        @Override
 			        public void actionPerformed(ActionEvent e) {
 			        	 String select_day= (String.valueOf(selectedDay));
-			        	 new detail(sendlist, select_day);
+			        	 new Detail_B(sendlist, select_day);
 			        }
 			    });
 
@@ -312,6 +312,6 @@ public class mainScreen extends JFrame implements ItemListener, ActionListener{
 	
 	//시작메소드
 	public static void main(String[] args) {
-		new mainScreen();
+		new MainScreen_B();
 	}
 }
