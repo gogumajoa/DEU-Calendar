@@ -69,8 +69,15 @@ public class Login_B extends JFrame {
 		btnNewButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				dispose();
-				new MainScreen_B();
+				try {
+					Crawling_C.DoorCrawling(textField.getText(), passwordField.getText());
+					dispose();
+					new MainScreen_B();
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+
 			}
 		});
 		btnNewButton.setBounds(481, 371, 97, 23);
