@@ -8,24 +8,23 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.List;
+import java.util.LinkedHashSet;
 
 import javax.swing.BorderFactory;
+import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JTextArea;
-import javax.swing.JTextField;
-import javax.swing.SwingConstants;
-
-import java.awt.SystemColor;
-import javax.swing.border.LineBorder;
 import javax.swing.JList;
-import javax.swing.AbstractListModel;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.SwingConstants;
+import javax.swing.border.LineBorder;
 
 public class MainScreen_B extends JFrame implements ItemListener, ActionListener{
 	Font fnt = new Font("굴림체", Font.BOLD, 15);
@@ -34,7 +33,8 @@ public class MainScreen_B extends JFrame implements ItemListener, ActionListener
 	Schedule_C controller = new Schedule_C();
 	int studentID=20215030;
 	ArrayList<ArrayList<ArrayList<String>>> result = controller.ConnectDB(studentID);
-	
+	 ArrayList<ArrayList<String>> subjectList = result.get(1); // 과목 정보를 가져옵니다.  (추가)
+	 ArrayList<ArrayList<String>> planList = result.get(1);
 	
 	//상단
 	JPanel selectPane = new JPanel(); //패널생성
@@ -59,6 +59,7 @@ public class MainScreen_B extends JFrame implements ItemListener, ActionListener
 	int month;
 	private final JLabel lblNewLabel = new JLabel("\uB3D9\uC758 \uCE98\uB9B0\uB354");
 	private final JLabel lblNewLabel_1 = new JLabel("\uC77C\uC815 \uB9AC\uC2A4\uD2B8");
+	private final JScrollPane scrollPane = new JScrollPane();
 	
 	
 	public MainScreen_B() {
@@ -108,24 +109,8 @@ public class MainScreen_B extends JFrame implements ItemListener, ActionListener
 		
 		getContentPane().add(lblNewLabel_1);
 		
-		JList list = new JList();
-		// 임시 데이터 저장하기 위한 코드 (수정해서 사용해야 함)
-		list.setModel(new AbstractListModel() {
-			String[] values = new String[] {"\uC77C\uC815 1", "\uC77C\uC815 2", "\uC77C\uC815 3", "\uC77C\uC815 4"};
-			public int getSize() {
-				return values.length;
-			}
-			public Object getElementAt(int index) {
-				return values[index];
-			}
-		});
-		list.setBounds(27, 89, 150, 539);
-		list.setBorder(BorderFactory.createLineBorder(Color.BLACK)); // 테두리 선
-		list.setFixedCellHeight(40);
-		getContentPane().add(list);
 		setDay();	//setDay()메소드를 호출한다.
-		
-		
+
 		//---------------------------기능이벤트를 추가-------------------------------
 		prevBtn.addActionListener(this);
 		nextBtn.addActionListener(this);
@@ -154,13 +139,12 @@ public class MainScreen_B extends JFrame implements ItemListener, ActionListener
 			dayPane.add(lbl);
 		}
 		//날짜추가
+		DefaultListModel<String> listModel = new DefaultListModel<>(); //
 		for(int day=1; day<=lastDay; day++) {			
 			  	JButton lbl = new JButton();
 			    
 			    lbl.setLayout(new BorderLayout()); // 버튼의 레이아웃을 BorderLayout으로 설정합니다.
-
-			    JLabel dayLabel = new JLabel(String.valueOf(day));
-			    
+			    JLabel dayLabel = new JLabel(String.valueOf(day));			    
 			    // 출력하는 날짜에 대한 요일
 			    date.set(Calendar.DATE, day);
 			    int w = date.get(Calendar.DAY_OF_WEEK);
@@ -177,41 +161,53 @@ public class MainScreen_B extends JFrame implements ItemListener, ActionListener
 			    StringBuilder scheduleBuilder = new StringBuilder();
 			    
 			    ArrayList<ArrayList<String>> sendlist = new ArrayList<>(); //detail로 보낼 정보들
-			    
+			    ArrayList<Integer> ddaylist = new ArrayList<>();
 			    for (ArrayList<String> planInfo : result.get(0)) {
 			        if (planInfo.get(2).equals(String.valueOf(year)+ String.valueOf(month)+String.valueOf(day))) {
 			        	sendlist.add(planInfo);
 			            String planTitle = planInfo.get(0);
 			            scheduleBuilder.append("- ").append(planTitle).append("\n");
-			     
+			            ddaylist.add(day);
 			        }
 			    }
 			    for (ArrayList<String> subjectInfo : result.get(1)) {
 			        if (subjectInfo.get(2).equals(String.valueOf(year)+ String.valueOf(month)+String.valueOf(day))) {
-			        	sendlist.add(subjectInfo);
+			            sendlist.add(subjectInfo);
 			            String subTitle = subjectInfo.get(0);
 			            scheduleBuilder.append("+ ").append(subTitle).append("\n");
+			            ddaylist.add(day);
 			        }
 			    }
-
 			    String scheduleText = scheduleBuilder.toString().trim();
 			    JLabel scheduleLabel = new JLabel("<html>" + scheduleText.replace("\n", "<br>") + "</html>");
 			    Font font = scheduleLabel.getFont();
-			    Font smallerFont = font.deriveFont(font.getSize() - 2f); // 폰트 크기를 2포인트 작게 설정
+			    Font smallerFont = font.deriveFont(font.getSize() -2f); // 글씨 크기 조절 
 			    scheduleLabel.setFont(smallerFont);
 			    scheduleLabel.setForeground(Color.BLUE);	// 일정내용 글씨 색설정
-			    lbl.add(scheduleLabel, BorderLayout.CENTER); // 일정을 버튼의 중앙에 추가합니다.
+			    lbl.add(scheduleLabel, BorderLayout.CENTER); // 일정을 버튼의 중앙에 추가합니다. 
 
 			    
+			    int dDayFormattedMonth = Integer.parseInt(LocalDate.now().format(DateTimeFormatter.ofPattern("M")));
+			    int dDayFormattedDay = Integer.parseInt(LocalDate.now().format(DateTimeFormatter.ofPattern("d")));
+
+			    if (!scheduleText.isEmpty()) {
+			        ArrayList<Integer> distinctDdays = new ArrayList<>(new LinkedHashSet<>(ddaylist));
+			        for (int dday : distinctDdays) {
+			            int dDayMonthDiff = month - dDayFormattedMonth;
+			            int dDayDayDiff = dday - dDayFormattedDay;
+			            int dDayDiff = dDayMonthDiff * lastDay + dDayDayDiff;
+			            if(dDayDiff<0) 		dDayDiff =0; // dday가 지났을경우 [D-0] 으로 출력 , [D- -2] 형식으로 출력하고 싶으면 211,212 코드 삭제 
+			            String dDayInfo = ("<html>" + scheduleText.replace("\n", "<br>") + "") + " [ D - " + dDayDiff + " ]";
+			            listModel.addElement(dDayInfo);
+			        }
+			    }
+
 			    lbl.setBackground(Color.white);
 			    lbl.setFont(fnt); // 버튼에 폰트를 설정합니다.
 			    
 			 // ActionListener 내부에서 day 변수를 사용하기 위해 클래스 멤버 변수로 변경
 			    final int selectedDay = day;
 			   
-
-			    
-			    
 			    lbl.addActionListener(new ActionListener() {
 			        @Override
 			        public void actionPerformed(ActionEvent e) {
@@ -220,9 +216,15 @@ public class MainScreen_B extends JFrame implements ItemListener, ActionListener
 			        }
 			    });
 
-
-
 			}
+				scrollPane.setBounds(27, 89, 150, 539);
+				
+				getContentPane().add(scrollPane);
+				JList<String> list = new JList<>(listModel);
+				scrollPane.setViewportView(list);
+				list.setBorder(BorderFactory.createLineBorder(Color.BLACK)); // 테두리 선
+				list.setFixedCellHeight(40);
+				
 	}
 	
 	//월화수목금토일 설정
