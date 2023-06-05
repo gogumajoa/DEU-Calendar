@@ -13,6 +13,9 @@ import java.awt.event.MouseEvent;
 import javax.swing.JPasswordField;
 import javax.swing.ImageIcon;
 import java.awt.Color;
+import javax.swing.JScrollBar;
+import javax.swing.JList;
+import javax.swing.JScrollPane;
 
 public class Login_B extends JFrame {
 
@@ -70,9 +73,10 @@ public class Login_B extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				try {
-					Crawling_C.DoorCrawling(textField.getText(), passwordField.getText());
-					dispose();
-					new MainScreen_B();
+					if(Crawling_C.DoorCrawling(textField.getText(), passwordField.getText())) {
+						dispose();
+						new MainScreen_B();
+					}
 				} catch (Exception e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
