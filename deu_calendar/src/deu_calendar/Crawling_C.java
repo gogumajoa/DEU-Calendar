@@ -42,8 +42,8 @@ public class Crawling_C {
             WebElement usernameInput = driver.findElement(By.id("logId"));
             WebElement passwordInput = driver.findElement(By.id("logPw"));
 
-            usernameInput.sendKeys("20172088");
-            passwordInput.sendKeys("donggon0104@");
+            usernameInput.sendKeys("도어아이디");
+            passwordInput.sendKeys("도어비밀번호");
             try {Thread.sleep(1000);} catch (InterruptedException e) {}		// 1초 대기
             
             // 로그인 버튼 클릭
