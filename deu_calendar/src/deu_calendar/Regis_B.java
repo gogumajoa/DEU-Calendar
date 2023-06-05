@@ -32,11 +32,15 @@ public class Regis_B extends JFrame {
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
-		String fullday="0";
+		
+		String select_day="0";
+		String year="0";
+		String month="0";
+		
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Regis_B frame = new Regis_B(fullday);
+					Regis_B frame = new Regis_B(year, month, select_day);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -47,8 +51,10 @@ public class Regis_B extends JFrame {
 
 	/**
 	 * Create the frame.
+	 * @param select_day 
+	 * @param month 
 	 */
-	public Regis_B(String fullday) {
+	public Regis_B(String year, String month, String select_day) {
 		setTitle("\uC77C\uC815 \uB4F1\uB85D");
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -161,7 +167,7 @@ public class Regis_B extends JFrame {
 		                break;
 		            }
 		        }
-		        reg.regist(fullday); // DB에 입력 값 삽입
+		        reg.regist(year, month, select_day); // DB에 입력 값 삽입
 
 				Window[] windows = Window.getWindows();
 		        for (Window window : windows) {
