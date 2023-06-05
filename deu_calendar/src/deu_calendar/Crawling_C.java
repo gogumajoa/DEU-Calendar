@@ -8,6 +8,7 @@ package deu_calendar;
 import java.util.List;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -59,12 +60,13 @@ public class Crawling_C {
             try {Thread.sleep(1000);} catch (InterruptedException e) {} 	// 1초 대기
 
             // 로그인 후 페이지의 HTML 파싱 또는 필요한 작업 수행(수정 필요)
-            String fixedCode = "CHGB001";
+            String fixedCode = "CHGB001";	// 과목에 고정된 값(이걸 통해 개인과목 조회)
             List<WebElement> titles = driver.findElements(By.xpath("//a[contains(@href, 'javascript:goRoom') and contains(@href, '" + fixedCode + "')]"));
             for(int i=0; i<titles.size(); i++) {
             	WebElement el = titles.get(i);
 
-            	el.click();		// 각 과목 클릭하여 이동
+            	JavascriptExecutor executor = (JavascriptExecutor) driver;	// 과목별 페이지 이동은 자바스크립트를 이용
+            	executor.executeScript("arguments[0].click();", el);	// 과목별 페이지 이동은 자바스크립트를 이용
             	try {Thread.sleep(1000);} catch (InterruptedException e) {}		// 1초 대기
             	
             	driver.findElement(By.xpath("//*[@id=\"lnbContent\"]/div/div[3]/ul/li/ul/li[3]/a/span")).click();	// 과제페이지 이동
@@ -73,18 +75,16 @@ public class Crawling_C {
             	WebElement subs = driver.findElement(By.className("tbl_type"));		// 과제페이지에서 과제란 요소저장
             	System.out.println(subs.getText());		// 저장된 과제란 전부 출력
             	
-            	for(int n=0; n<=1; n++)		// 강의실 페이지로 다시 이동(2번 필수)
-            		driver.navigate().back();	// 뒤로가기 메소드
-            	
-            	Actions actions = new Actions(driver);		// 뒤로가기 실행후 화면의 빈여백 클릭을 위함
-            	actions.moveByOffset(0, 0).click().build().perform();	// 좌표(0,0) 마우스 여백 클릭
-            	
-            	try {Thread.sleep(1000);} catch (InterruptedException e) {}
+            	// 강의실 페이지로 다시 이동(2번 필수)
+            	driver.navigate().back();	// 뒤로가기 메소드
+            	try {Thread.sleep(1000);} catch (InterruptedException e) {}		// 1초 대기
+            	driver.navigate().back();
+        
             }
      
         } finally {
             // WebDriver 종료
-//            driver.quit();
+            driver.quit();
         }
 	}
 
