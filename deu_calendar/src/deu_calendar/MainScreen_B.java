@@ -208,7 +208,7 @@ public class MainScreen_B extends JFrame implements ItemListener, ActionListener
 			    
 			 // ActionListener 내부에서 day 변수를 사용하기 위해 클래스 멤버 변수로 변경
 			    final int selectedDay = day;
-			    final String fullday = String.valueOf(year) + String.valueOf(month) + String.valueOf(day);
+			   
 
 			    
 			    
@@ -216,7 +216,7 @@ public class MainScreen_B extends JFrame implements ItemListener, ActionListener
 			        @Override
 			        public void actionPerformed(ActionEvent e) {
 			        	 String select_day= (String.valueOf(selectedDay));
-			        	 new Detail_B(sendlist, select_day,fullday);
+			        	 new Detail_B(sendlist, String.valueOf(year) , String.valueOf(month),select_day );
 			        }
 			    });
 
@@ -237,7 +237,7 @@ public class MainScreen_B extends JFrame implements ItemListener, ActionListener
 	}
 	//년도세팅
 	public void setYear() {
-		for(int i= year-50; i<year+20; i++) { //해당구문을 반복문을돌려서
+		for(int i= year-50; i<year+6; i++) { //해당구문을 반복문을돌려서
 			yearCombo.addItem(i); //yearCombo박스에 담는다.
 		}
 		yearCombo.setSelectedItem(year); //콤보박스에 담지만 이벤트와 연동시켜주기위해 선언
