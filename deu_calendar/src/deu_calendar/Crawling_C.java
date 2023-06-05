@@ -1,10 +1,10 @@
 package deu_calendar;
   
-import javax.net.ssl.HttpsURLConnection;
-import javax.net.ssl.SSLContext;
-import javax.net.ssl.TrustManager;
-import javax.net.ssl.X509TrustManager;
-import java.security.cert.X509Certificate;
+//import javax.net.ssl.HttpsURLConnection;
+//import javax.net.ssl.SSLContext;
+//import javax.net.ssl.TrustManager;
+//import javax.net.ssl.X509TrustManager;
+//import java.security.cert.X509Certificate;
 import java.util.List;
 
 import org.openqa.selenium.By;
@@ -12,6 +12,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.interactions.Actions;
 
 
 public class Crawling_C {
@@ -41,7 +42,7 @@ public class Crawling_C {
             WebElement passwordInput = driver.findElement(By.id("logPw"));
 
             usernameInput.sendKeys("도어아이디");
-            passwordInput.sendKeys("도어비밀먼호");
+            passwordInput.sendKeys("도어비밀번호");
             try {Thread.sleep(1000);} catch (InterruptedException e) {}		// 1초 대기
             
             // 로그인 버튼 클릭
@@ -58,9 +59,27 @@ public class Crawling_C {
             try {Thread.sleep(1000);} catch (InterruptedException e) {} 	// 1초 대기
 
             // 로그인 후 페이지의 HTML 파싱 또는 필요한 작업 수행(수정 필요)
-            List<WebElement> titles = driver.findElements(By.className("tAlignL pad_10 font_wei_n"));
-            for(WebElement el:titles) {
-            	System.out.println(el.getText());
+            String fixedCode = "CHGB001";
+            List<WebElement> titles = driver.findElements(By.xpath("//a[contains(@href, 'javascript:goRoom') and contains(@href, '" + fixedCode + "')]"));
+            for(int i=0; i<titles.size(); i++) {
+            	WebElement el = titles.get(i);
+
+            	el.click();		// 각 과목 클릭하여 이동
+            	try {Thread.sleep(1000);} catch (InterruptedException e) {}		// 1초 대기
+            	
+            	driver.findElement(By.xpath("//*[@id=\"lnbContent\"]/div/div[3]/ul/li/ul/li[3]/a/span")).click();	// 과제페이지 이동
+            	try {Thread.sleep(1000);} catch (InterruptedException e) {}		// 1초 대기
+            	
+            	WebElement subs = driver.findElement(By.className("tbl_type"));		// 과제페이지에서 과제란 요소저장
+            	System.out.println(subs.getText());		// 저장된 과제란 전부 출력
+            	
+            	for(int n=0; n<=1; n++)		// 강의실 페이지로 다시 이동(2번 필수)
+            		driver.navigate().back();	// 뒤로가기 메소드
+            	
+            	Actions actions = new Actions(driver);		// 뒤로가기 실행후 화면의 빈여백 클릭을 위함
+            	actions.moveByOffset(0, 0).click().build().perform();	// 좌표(0,0) 마우스 여백 클릭
+            	
+            	try {Thread.sleep(1000);} catch (InterruptedException e) {}
             }
      
         } finally {
