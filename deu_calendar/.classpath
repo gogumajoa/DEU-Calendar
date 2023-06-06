@@ -6,10 +6,11 @@
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="C:/Users/User/Downloads/ojdbc11 (1).jar">
+	<classpathentry kind="lib" path="C:/Users/atrix/Desktop/Git/DEU-Calendar/ojdbc8.jar">
 		<attributes>
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="lib" path="C:/Users/atrix/Desktop/Git/DEU-Calendar/selenium-server-4.9.1.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
